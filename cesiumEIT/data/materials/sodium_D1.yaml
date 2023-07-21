@@ -1,0 +1,38 @@
+# All Values and functions come from the "Sodium D Line Data" by Daniel Adam Steck revision 2.2.1, 21 November 2019
+
+sodium:
+  
+  m0: 0.381754035e-25
+  I: 3/2
+
+  number_density: custom_function.sodium_number_density
+
+  wavelength: 589.7558147e-9
+  lifetime: 16.299e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 1.10726633050e9
+    - -0.66435979830e9
+  excitedstate_frequencies:
+    - -118.05e6
+    - 70.830e6
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: "2 * 1/4 + 1/3"
+    1: "2 * (1/3 + 1/12)"
+    2: "2 * 1/12"
+    3: "2 * (1/4) + 1/3"
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 2
+    1: 3
+    2: 0
+    3: 1

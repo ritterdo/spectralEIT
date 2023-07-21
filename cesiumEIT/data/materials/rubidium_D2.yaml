@@ -1,0 +1,98 @@
+# All Values and functions come from the "Rubidium 85 D Line Data" and "Rubidium 87 D Line Data" by Daniel Adam Steck revision 2.2.3, 9 July 2021 and revision 1.6, 14 October 2003, repectively
+rubidium85:
+
+  m0: 1.40999303e-25
+  I: 5/2
+
+  number_density: custom_function.cesium_number_density
+
+  wavelength: 780.241368271e-9
+  lifetime: 26.2348e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 1.7708439228e9
+    - -1.2648885163e9
+  excitedstate_frequencies:
+    - -113.208e6
+    - -83.835e6
+    - -20.435e6
+    - 100.205e6
+
+  # If not all transitions are possible or allowed set this
+  # counting as the first number is the groundstate and second is the exited state
+  # [11, 12, 13, 14, 15, ..., 21, 22, 23, 24, ...]
+  # If all transitions are allowed don't set this variable
+  Hf_config: [0,1,2,5,6,7]
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: "2 * (5/189 + 8/189) + 1/21" # F=3, F'=2
+    1: "2 * (5/25 + 5/54 + 5/216)" # F=3, F'=3
+    2: "2 * (1/8 + 3/14 + 15/56) + 2/7" # F=3, F'=4
+    3: "2 * (2/27 + 16/135) + 2/15" # F=2, F'=1
+    4: "2 * (7/27 + 7/108)" # F=2, F'=2
+    5: "2 * (3/20) + 1/5" # F=2, F'=3
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 3
+    1: 4
+    2: 5
+    3: 0
+    4: 1
+    5: 2
+
+rubidium87:
+
+  m0: 1.44316060e-25
+  I: 3/2
+
+  number_density: custom_function.cesium_number_density
+
+  wavelength: 780.241209686e-9
+  lifetime: 26.24e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 4.27167663181519e9
+    - -2.56300597908911e9
+  excitedstate_frequencies:
+    - -302.0738e6
+    - -229.8518e6
+    - -72.9113e6
+    - 193.7408e6
+
+  # If not all transitions are possible or allowed set this
+  # counting as the first number is the groundstate and second is the exited state
+  # [11, 12, 13, 14, 15, ..., 21, 22, 23, 24, ...]
+  # If all transitions are allowed don't set this variable
+  Hf_config: [0,1,2,5,6,7]
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: "2 * (1/40) + 1/30" # F=2, F'=1
+    1: "2 * (1/6 + 1/24)" # F=2, F'=2
+    2: "2 * (1/6 + 4/15) + 3/10" # F=2, F'=3
+    3: "1/6" # F=1, F'=0
+    4: "2 * (5/24)" # F=1, F'=1
+    5: "2 * (1/8) + 1/6" # F=1, F'=2
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 3
+    1: 4
+    2: 5
+    3: 0
+    4: 1
+    5: 2

@@ -1,8 +1,0 @@
-2023-07-21 14:22:33,546 - INFO - __main__ - Application Starts
-2023-07-21 14:22:33,559 - DEBUG - cesiumEIT.ui.main_window - Initiate MainWindow
-2023-07-21 14:22:33,559 - DEBUG - cesiumEIT.ui.main_window - Set MainWindow properties
-2023-07-21 14:22:33,884 - INFO - configuration_tab - Initiate ConfigurationTab
-2023-07-21 14:22:33,999 - DEBUG - cesiumEIT.ui.main_window - Set MainWindow statusbar
-2023-07-21 14:22:34,000 - DEBUG - cesiumEIT.ui.main_window - Initiat MainWindow menu bar
-2023-07-21 14:22:38,871 - DEBUG - cesiumEIT.ui.main_window - Initate closing sequence
-2023-07-21 14:22:39,495 - DEBUG - cesiumEIT.ui.main_window - Closing Application

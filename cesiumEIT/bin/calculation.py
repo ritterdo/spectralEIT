@@ -1,6 +1,9 @@
 import numpy as np
 
+import json
+
 import cesiumEIT.bin.auxiliary_func as aux
+import cesiumEIT.bin.log as log
 
 from cesiumEIT.bin.constants import constants as con
 from cesiumEIT.bin.parameters import Parameters as par
@@ -10,6 +13,10 @@ from cesiumEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
 class LightPropagation():
 
     def __init__(self, parameters=None):
+
+        self.logger = log.get_logger(__name__)
+        self.logger.info("Setting calculation in LightPropagation")
+        self.logger.debug("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
 
         if parameters == None:
             raise ValueError("No parameters were given!")
@@ -25,6 +32,7 @@ class LightPropagation():
 
 
     def _init_variables(self):
+        self.logger.debug("Initiate variables")
         self.reset()
         self.cancelBool = False
         self.z,self.dz     = np.linspace(0,self.par.cellLength,self.par.zsteps,retstep=True)
@@ -40,6 +48,7 @@ class LightPropagation():
 
 
     def reset(self):
+        self.logger.debug("Reset variables")
         if hasattr(self, "z"):
             del self.z
         if hasattr(self, "dz"):
@@ -110,6 +119,8 @@ class LightPropagation():
 
 
     def calculate(self, progress_callback=None):
+
+        self.logger.info("Starting calculation")
         
         self._init_variables()
         
@@ -120,6 +131,8 @@ class LightPropagation():
         k0 = getattr(self.materials,self.materials.mat_list[0]).k0
         
         self.IoutW, self.IinW, self.IoutT, self.IinT, self.TAbs, self.chiShape, self.rabiFunction, self.t, self.z = self._calculate(wavelength, k0, progress_callback)
+
+        self.logger.debug("Calculation finished")
 
     ## Propagation of the light through a Cesium cell with or without a waveguide
     def _calculate(self, wavelength, k0, progress_callback=None):

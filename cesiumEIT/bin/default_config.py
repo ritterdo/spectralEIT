@@ -1,5 +1,7 @@
 import numpy as np
 
+import cesiumEIT.bin.log as log
+
 from os import path, listdir, getcwd
 from PyQt5 import uic
 from platform import system
@@ -9,6 +11,8 @@ ui_path = path.join(*list(path.split(getcwd())) + ["ui"])
 
 class DefaultClass:
 
+    def __init__(self, name:str = __name__):
+        self.logger = log.get_logger(name)
 
     def load_ui(self, name: str):
         assert name.endswith(".ui")

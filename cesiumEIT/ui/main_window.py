@@ -22,7 +22,10 @@ class MainWindow(QMainWindow, DefaultClass):
     plot_tab_changed = pyqtSignal(int)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        QMainWindow.__init__(self, *args, **kwargs)
+        DefaultClass.__init__(self, __name__)
+
+        self.logger.debug("Initiate MainWindow")
 
         self.set_window_properties()
 
@@ -67,6 +70,8 @@ class MainWindow(QMainWindow, DefaultClass):
 
     def set_window_properties(self):
 
+        self.logger.debug("Set MainWindow properties")
+
         self.load_ui("mainWindow.ui")
         #self.setWindowFlags(Qt.FramelessWindowHint)
         self.oldPos = self.pos()
@@ -74,6 +79,8 @@ class MainWindow(QMainWindow, DefaultClass):
 
 
     def set_statusbar(self):
+
+        self.logger.debug("Set MainWindow statusbar")
 
         self.statusbarMessage = QLabel()
         self.statusbarMessage.setText("Ready")
@@ -85,6 +92,9 @@ class MainWindow(QMainWindow, DefaultClass):
 
 
     def init_menu(self):
+
+        self.logger.debug("Initiat MainWindow menu bar")
+
         ## Setup menu bar
         self.actionRabi_Frequency_Calculator.triggered.connect(self.show_rabi_calculator)
         self.actionLoss_LC_Calculator.triggered.connect(self.show_loss_lc_calculator)
@@ -102,6 +112,7 @@ class MainWindow(QMainWindow, DefaultClass):
     ## Close Function
     def closeEvent(self,event):
 
+        self.logger.debug("Initate closing sequence")
         result = info.showQuestionBox("Confirm Exit...", "Are you sure you want to exit?")
 
         event.ignore()
@@ -111,6 +122,7 @@ class MainWindow(QMainWindow, DefaultClass):
                 self.rabiWindow.close()
             if self.lossWindow:
                 self.lossWindow.close()
+            self.logger.debug("Closing Application")
             event.accept()
 
 
@@ -128,7 +140,9 @@ class MainWindow(QMainWindow, DefaultClass):
 
     def update_plotted_list(self, list: list):
         self.plotted_list.clear()
+        self.logger.debug("Plotted list changed to: " + "".join(item.name() for item in list))
         for item in list:
+            print(item.name())
             self.plotted_list.add_item(item)
 
 
@@ -151,6 +165,7 @@ class MainWindow(QMainWindow, DefaultClass):
 
     def _plot_tab_changed(self, index):
         tab = self.tab_graph_widget.widget(index)
+        self.logger.debug("Graph tab changed to %s", self.tab_graph_widget.tabText(index))
         self.update_plotted_list(tab.plotted.values())
 
 

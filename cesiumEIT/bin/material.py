@@ -1,5 +1,7 @@
 import yaml
 import os
+import logging
+import json
 
 import numpy as np
 
@@ -14,6 +16,9 @@ class Material():
 
     def __init__(self, material: str=""):
 
+        self.logger = logging.getLogger(material)
+        self.logger.info("Initiate material %s", material)
+
         if material == None or material == "":
            raise MaterialError("No material selected")
 
@@ -21,11 +26,14 @@ class Material():
            raise MaterialError("Material not found in material/data")
 
         data_dict = self.get_dict(material)
-        
+
+        self.logger.debug("Material parameters: %s", json.dumps(data_dict) if data_dict is not None else {})
         
         #if self.check_params(self.data_dict):
         self.set_material(material, data_dict)
         self.create_Hf()
+
+        self.logger.debug("Material setup finished")
         # else:
         #     raise ValueError("yaml-file params do not match the expected parameters")
 

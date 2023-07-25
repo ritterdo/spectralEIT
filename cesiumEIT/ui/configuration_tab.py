@@ -512,7 +512,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         for keys in par_dict.keys():
             parameter_dictionary[keys] = par_dict[keys]
 
-        csCalc = calc.LightPropagation(parameter_dictionary, self.logger)
+        csCalc = calc.LightPropagation(parameter_dictionary)
         csCalc.calculate()
         return csCalc.IoutW
 

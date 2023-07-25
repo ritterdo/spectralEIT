@@ -11,14 +11,14 @@ def get_logger():
     logger = logging.getLogger() 
     logger.setLevel(logging.DEBUG)  
 
-    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s")
-
     if debug_mode:
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(module)s.%(funcName)s() - %(name)s - %(message)s")
         file_debug_handler = logging.FileHandler("logs/debug_" + now.strftime("%Y-%m-%d_%H:%M") + ".log")
         file_debug_handler.setLevel(logging.DEBUG)  
         file_debug_handler.setFormatter(formatter)
         logger.addHandler(file_debug_handler)
     else:
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(message)s")
         file_info_handler = logging.FileHandler("logs/info_" + now.strftime("%Y-%m-%d_%H:%M") + ".log")
         file_info_handler.setLevel(logging.INFO)  
         file_info_handler.setFormatter(formatter)

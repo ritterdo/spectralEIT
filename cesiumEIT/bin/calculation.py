@@ -26,13 +26,13 @@ class LightPropagation():
     def set_parameters(self, parameters):
         self.parameter_dict = parameters
         self.par = par(parameters)
-        self.logger.debug("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
+        self.logger.info("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
         # self.f = np.linspace(self.par.freqStart, self.par.freqStop, self.par.freqSteps)
         # self.gridSize = len(self.f)
 
 
     def _init_variables(self):
-        self.logger.debug("Initiate variables")
+        self.logger.info("Initiate variables")
         self.reset()
         self.cancelBool = False
         self.z,self.dz     = np.linspace(0,self.par.cellLength,self.par.zsteps,retstep=True)
@@ -48,7 +48,7 @@ class LightPropagation():
 
 
     def reset(self):
-        self.logger.debug("Reset variables")
+        self.logger.info("Reset variables")
         if hasattr(self, "z"):
             del self.z
         if hasattr(self, "dz"):
@@ -132,7 +132,7 @@ class LightPropagation():
         
         self.IoutW, self.IinW, self.IoutT, self.IinT, self.TAbs, self.chiShape, self.rabiFunction, self.t, self.z = self._calculate(wavelength, k0, progress_callback)
 
-        self.logger.debug("Calculation finished")
+        self.logger.info("Calculation finished")
 
     ## Propagation of the light through a Cesium cell with or without a waveguide
     def _calculate(self, wavelength, k0, progress_callback=None):

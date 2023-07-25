@@ -328,7 +328,7 @@ class ConfigurationTab(QWidget, DefaultClass):
                     item_name = "calc"
                 )
         name = self.window().calc_list.currentItem().text()
-        self.logger.debug("CALCULATION: Calculation name: %s", name)
+        self.logger.info("CALCULATION: Calculation name: %s", name)
         try:
             if name in self.window().threadIsRunning.keys():
                 raise ThreadError("CALCULATION: Calculation already running")
@@ -345,7 +345,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.window().statusbar.addWidget(tmp)
 
         try:
-            self.logger.debug("CALCULATION: Setting up working thread")
+            self.logger.info("CALCULATION: Setting up working thread")
             # setattr(self, "worker_{}".format(name), workers.Worker(self.calculation_function, objectName = name))
             # worker = getattr(self, "worker_{}".format(name))
             worker = workers.Worker(self.calculation_function, objectName = name)
@@ -358,7 +358,7 @@ class ConfigurationTab(QWidget, DefaultClass):
             raise e
             return
 
-        self.logger.debug("CALCULATION: Starting worker %s", name)
+        self.logger.info("CALCULATION: Starting worker %s", name)
         self.window().threadpool.start(worker)
 
 
@@ -430,7 +430,7 @@ class ConfigurationTab(QWidget, DefaultClass):
             info.showCriticalErrorBox(sys.exc_info())
             return
 
-        self.logger.debug("FITTING: Fitting of measurement %s with the calculation %s", plotable_item.text(), calc_name)
+        self.logger.info("FITTING: Fitting of measurement %s with the calculation %s", plotable_item.text(), calc_name)
 
         try:
             if "fit_{}".format(calc_name) in self.window().threadIsRunning.keys():
@@ -440,7 +440,7 @@ class ConfigurationTab(QWidget, DefaultClass):
             return
 
         try:
-            self.logger.debug("FITTING: Setting up working thread")
+            self.logger.info("FITTING: Setting up working thread")
             worker = workers.Worker(self.fitting_start, measurement, objectName=calc_name)
             worker.signals.result.connect(self.fitting_result)
             worker.signals.finished.connect(self.fitting_finished)
@@ -450,7 +450,7 @@ class ConfigurationTab(QWidget, DefaultClass):
             self.fitting_error(sys.exec_info(), calc_name)
             return
 
-        self.logger.debug("FITTING: Starting worker %s", calc_name)
+        self.logger.info("FITTING: Starting worker %s", calc_name)
         try:
             self.window().threadpool.start(worker)
         except Exception as e:

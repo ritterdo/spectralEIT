@@ -21,7 +21,7 @@ class PlotTab(QWidget, DefaultClass):
         QWidget.__init__(self, *args, **kwargs)
         DefaultClass.__init__(self, __name__)
 
-        self.logger.debug("Initiate PlotTab")
+        self.logger.info("Initiate PlotTab")
 
         self.load_ui("graphTab.ui")
 

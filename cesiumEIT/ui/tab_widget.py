@@ -20,9 +20,11 @@ class GraphTabWidget(QTabWidget):
         self.currentChanged.connect(lambda: self.window().plot_tab_changed.emit(self.currentIndex()))
 
         ## Add standart widgets
-        self.logger.debug("Adding default tabs: Frequency, Time, Space")
+        self.logger.debug("Adding default tabs Frequency")
         self.addTab(name="Frequency", labels={"bottom":("Frequency", "Hz"), "left":"Transmission"})
+        self.logger.debug("Adding default tabs Time")
         self.addTab(name="Time", labels={"bottom":("Time", "s"), "left":("Intensity", "a.u.")})
+        self.logger.debug("Adding default tabs Space")
         self.addTab(name="Space", labels={"bottom":("Distance", "m"), "left":("Rabi-Frequncy", "Hz")})
 
 

@@ -1,9 +1,13 @@
 from PyQt5.QtWidgets import QListWidget
+import logging
 
 class CustomListWidget(QListWidget):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, name:str = __name__, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.logger = logging.getLogger(name)
+        self.logger.info("Initiate %s logger", name)
 
         self.list_names = []
 

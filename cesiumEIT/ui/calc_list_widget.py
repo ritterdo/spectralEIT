@@ -4,7 +4,9 @@ from cesiumEIT.bin.calc_list_item import CalcListItem
 class CalcListWidget(CustomListWidget):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, name=__name__, **kwargs)
+
+        self.logger.info("Initiate CalcListWidget")
 
         self.ListItem = CalcListItem
 

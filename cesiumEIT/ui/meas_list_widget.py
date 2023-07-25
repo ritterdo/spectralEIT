@@ -4,7 +4,9 @@ from cesiumEIT.bin.meas_list_item import MeasListItem
 class MeasListWidget(CustomListWidget):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, name=__name__, **kwargs)
+
+        self.logger.info("Initiate MeasListWidget")
 
         self.ListItem = MeasListItem
 

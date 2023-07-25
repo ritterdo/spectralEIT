@@ -1,0 +1,7 @@
+name: cesiumEIT
+dependencies:
+  - python==3.11.4
+  - anaconda
+  - pip
+  - pip:
+    - -r requirements.txt

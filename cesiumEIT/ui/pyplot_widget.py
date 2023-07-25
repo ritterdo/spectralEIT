@@ -36,7 +36,7 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
         if "name" in kwargs:
             self.name = kwargs["name"]
 
-        super().__init__(
+        pg.PlotWidget.__init__(self,
             *args,
             axisItems={
                 "bottom": AxisItem(orientation="bottom"),
@@ -46,6 +46,7 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
             },
             **kwargs
         )
+        DefaultClass.__init__(self, __name__)
 
         if "labels" in kwargs:
             labels = kwargs["labels"]

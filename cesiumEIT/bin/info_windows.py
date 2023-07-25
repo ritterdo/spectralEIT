@@ -3,9 +3,9 @@ from PyQt5.QtCore import Qt
 
 from traceback import format_exception
 
-import cesiumEIT.bin.log as log
+import logging
 
-logger = log.get_logger("MessageBox")
+logger = logging.getLogger("MessageBox")
 
 def showCriticalMessageBox(message):
     msg = QMessageBox()

@@ -3,7 +3,7 @@ import numpy as np
 import json
 
 import cesiumEIT.bin.auxiliary_func as aux
-import cesiumEIT.bin.log as log
+import logging
 
 from cesiumEIT.bin.constants import constants as con
 from cesiumEIT.bin.parameters import Parameters as par
@@ -14,9 +14,8 @@ class LightPropagation():
 
     def __init__(self, parameters=None):
 
-        self.logger = log.get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
         self.logger.info("Setting calculation in LightPropagation")
-        self.logger.debug("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
 
         if parameters == None:
             raise ValueError("No parameters were given!")
@@ -27,6 +26,7 @@ class LightPropagation():
     def set_parameters(self, parameters):
         self.parameter_dict = parameters
         self.par = par(parameters)
+        self.logger.debug("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
         # self.f = np.linspace(self.par.freqStart, self.par.freqStop, self.par.freqSteps)
         # self.gridSize = len(self.f)
 

@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QPoint
 import numpy as np
 
 from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.default_config import *
+from cesiumEIT.bin.default_config import DefaultClass
 
 import cesiumEIT.bin.string_manipulation as stringManipu
 

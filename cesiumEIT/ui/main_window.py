@@ -11,7 +11,7 @@ import cesiumEIT.bin.input_dialog as input
 import cesiumEIT.bin.parameters as par
 
 from cesiumEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
-from cesiumEIT.bin.default_config import *
+from cesiumEIT.bin.default_config import DefaultClass
 
 class MainWindow(QMainWindow, DefaultClass):
 
@@ -25,7 +25,7 @@ class MainWindow(QMainWindow, DefaultClass):
         QMainWindow.__init__(self, *args, **kwargs)
         DefaultClass.__init__(self, __name__)
 
-        self.logger.debug("Initiate MainWindow")
+        self.logger.info("Initiate MainWindow")
 
         self.set_window_properties()
 
@@ -67,6 +67,8 @@ class MainWindow(QMainWindow, DefaultClass):
         # Initialize window variables
         self.init_windows()
 
+        self.logger.info("MainWindow successfully initiated")
+
 
     def set_window_properties(self):
 
@@ -93,7 +95,7 @@ class MainWindow(QMainWindow, DefaultClass):
 
     def init_menu(self):
 
-        self.logger.debug("Initiat MainWindow menu bar")
+        self.logger.debug("Initiate MainWindow menu bar")
 
         ## Setup menu bar
         self.actionRabi_Frequency_Calculator.triggered.connect(self.show_rabi_calculator)
@@ -122,7 +124,9 @@ class MainWindow(QMainWindow, DefaultClass):
                 self.rabiWindow.close()
             if self.lossWindow:
                 self.lossWindow.close()
-            self.logger.debug("Closing Application")
+
+            self.logger.info("Closing Application")
+            
             event.accept()
 
 

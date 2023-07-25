@@ -18,7 +18,10 @@ class PlotTab(QWidget, DefaultClass):
     sigSetPoints = pyqtSignal(str,list)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        QWidget.__init__(self, *args, **kwargs)
+        DefaultClass.__init__(self, __name__)
+
+        self.logger.debug("Initiate PlotTab")
 
         self.load_ui("graphTab.ui")
 

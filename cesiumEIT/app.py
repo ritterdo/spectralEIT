@@ -22,7 +22,7 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 def main():
     
-    logger = log.get_logger(__name__)
+    logger = log.get_logger()
     logger.info("Application Starts")
 
     # QApplication.setGraphicsSystem("raster")

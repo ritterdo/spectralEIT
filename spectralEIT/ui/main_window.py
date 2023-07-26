@@ -3,15 +3,15 @@ from PyQt5.QtCore import QThreadPool, Qt, pyqtSignal, QPoint
 
 import re
 
-import cesiumEIT.ui.loss_lc_calculator as lossWin
-import cesiumEIT.ui.rabi_frequency as rabiWin
+import spectralEIT.ui.loss_lc_calculator as lossWin
+import spectralEIT.ui.rabi_frequency as rabiWin
 
-import cesiumEIT.bin.info_windows as info
-import cesiumEIT.bin.input_dialog as input
-import cesiumEIT.bin.parameters as par
+import spectralEIT.bin.info_windows as info
+import spectralEIT.bin.input_dialog as input
+import spectralEIT.bin.parameters as par
 
-from cesiumEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
-from cesiumEIT.bin.default_config import *
+from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
+from spectralEIT.bin.default_config import *
 
 class MainWindow(QMainWindow, DefaultClass):
 

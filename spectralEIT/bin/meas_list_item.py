@@ -1,5 +1,5 @@
-from cesiumEIT.bin.measurement import Measurements
-from cesiumEIT.bin.data_list_item import DataListItem
+from spectralEIT.bin.measurement import Measurements
+from spectralEIT.bin.data_list_item import DataListItem
 
 class MeasListItem(Measurements, DataListItem):
 

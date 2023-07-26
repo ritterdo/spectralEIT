@@ -1,5 +1,5 @@
-from cesiumEIT.bin.custom_list_widget import CustomListWidget
-from cesiumEIT.bin.plotable_list_item import PlotableListItem
+from spectralEIT.bin.custom_list_widget import CustomListWidget
+from spectralEIT.bin.plotable_list_item import PlotableListItem
 
 class PlottedList(CustomListWidget):
 

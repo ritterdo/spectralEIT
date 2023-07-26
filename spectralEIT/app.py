@@ -3,13 +3,13 @@ import sys, os
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 sys.path += ["../",os.path.join("..", ".."), "."]
 
-from cesiumEIT.bin.default_config import *
+from spectralEIT.bin.default_config import *
 
 sys.path += [ui_path]
 
 os.environ["QT_MAC_WANTS_LAYER"] = "1"
 
-from cesiumEIT.ui.main_window import MainWindow
+from spectralEIT.ui.main_window import MainWindow
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QFile, QTextStream

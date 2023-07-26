@@ -6,9 +6,9 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal, QRect
 from PyQt5.QtGui import QFont, QColor
 
-from cesiumEIT.bin.default_config import DefaultClass, COLOUR_MAP
+from spectralEIT.bin.default_config import DefaultClass, COLOUR_MAP
 
-import cesiumEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.string_manipulation as stringManipu
 
 
 class AxisItem(pg.AxisItem):

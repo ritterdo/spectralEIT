@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHeaderView
 from PyQt5.QtCore import Qt
 
 
-import cesiumEIT.bin.info_windows as info
-import cesiumEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.info_windows as info
+import spectralEIT.bin.string_manipulation as stringManipu
 
 class ParameterWindow(QWidget):
 

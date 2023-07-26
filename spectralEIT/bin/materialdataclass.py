@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.custom_yaml import YamlImport
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.custom_yaml import YamlImport
 
 class MaterialDataClass(YamlImport):
 

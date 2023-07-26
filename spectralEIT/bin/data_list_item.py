@@ -1,5 +1,5 @@
-from cesiumEIT.bin.custom_list_item import CustomListItem
-from cesiumEIT.bin.plot_data_item import PlotDataItem
+from spectralEIT.bin.custom_list_item import CustomListItem
+from spectralEIT.bin.plot_data_item import PlotDataItem
 
 class DataListItem(CustomListItem):
 

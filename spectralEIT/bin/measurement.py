@@ -7,13 +7,13 @@ import numpy as np
 
 from pybaselines import Baseline
 
-import cesiumEIT.bin.auxiliary_func as aux
-import cesiumEIT.bin.info_windows as info
+import spectralEIT.bin.auxiliary_func as aux
+import spectralEIT.bin.info_windows as info
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.material import Material as mat
-from cesiumEIT.bin.data_io import DataIO
-from cesiumEIT.bin.exceptions import BackgroundRemoveError, SubsamplingError, ResetError
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.material import Material as mat
+from spectralEIT.bin.data_io import DataIO
+from spectralEIT.bin.exceptions import BackgroundRemoveError, SubsamplingError, ResetError
 
 from scipy.optimize import curve_fit
 from scipy.interpolate import interp1d

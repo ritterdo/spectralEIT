@@ -4,10 +4,10 @@ from PyQt5.QtCore import Qt, QPoint
 
 from numpy import log10
 
-import cesiumEIT.bin.string_manipulation as stringManipu
-import cesiumEIT.bin.info_windows as info
+import spectralEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.info_windows as info
 
-from cesiumEIT.bin.default_config import *
+from spectralEIT.bin.default_config import *
 
 import sys
 

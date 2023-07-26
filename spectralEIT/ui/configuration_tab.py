@@ -6,15 +6,15 @@ from PyQt5 import uic
 
 from scipy.optimize import curve_fit
 
-import cesiumEIT.bin.info_windows as info
-import cesiumEIT.bin.string_manipulation as stringManipu
-import cesiumEIT.bin.workers as workers
-import cesiumEIT.bin.calculation as calc
+import spectralEIT.bin.info_windows as info
+import spectralEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.workers as workers
+import spectralEIT.bin.calculation as calc
 
-from cesiumEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
-from cesiumEIT.bin.fit_parameters import fit_params_bound, fit_params_list
-from cesiumEIT.bin.exceptions import ThreadError
-from cesiumEIT.bin.default_config import *
+from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
+from spectralEIT.bin.fit_parameters import fit_params_bound, fit_params_list
+from spectralEIT.bin.exceptions import ThreadError
+from spectralEIT.bin.default_config import *
 
 class ConfigurationTab(QWidget, DefaultClass):
 

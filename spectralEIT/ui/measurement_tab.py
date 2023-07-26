@@ -6,11 +6,11 @@ import numpy as np
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSignal
 
-import cesiumEIT.bin.info_windows as info
-import cesiumEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.info_windows as info
+import spectralEIT.bin.string_manipulation as stringManipu
 
-from cesiumEIT.bin.default_config import DefaultClass
-from cesiumEIT.bin.exceptions import InputError
+from spectralEIT.bin.default_config import DefaultClass
+from spectralEIT.bin.exceptions import InputError
 
 class MeasurementTab(QWidget, DefaultClass):
 

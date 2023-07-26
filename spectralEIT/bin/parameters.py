@@ -3,10 +3,10 @@ import numpy as np
 import os
 import yaml
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
 
-from cesiumEIT.bin.custom_yaml import YamlImport
+from spectralEIT.bin.custom_yaml import YamlImport
 
 class Parameters(YamlImport):
 

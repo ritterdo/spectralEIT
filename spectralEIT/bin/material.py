@@ -3,10 +3,10 @@ import os
 
 import numpy as np
 
-from cesiumEIT.bin.exceptions import MaterialError
+from spectralEIT.bin.exceptions import MaterialError
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.materialdataclass import MaterialDataClass
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.materialdataclass import MaterialDataClass
 
 
 class Material():
@@ -31,12 +31,12 @@ class Material():
 
 
     def get_dict(self, material: str):
-        ## working direction is ./cesiumEIT/
+        ## working direction is ./spectralEIT/
         return yaml.safe_load(open("data/materials/" + material + ".yaml"))
 
 
     def get_material_list(self):
-        ## working direction is ./cesiumEIT/
+        ## working direction is ./spectralEIT/
         return os.listdir("data/materials/")
 
 

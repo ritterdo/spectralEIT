@@ -1,4 +1,4 @@
-from cesiumEIT.bin.custom_list_item import CustomListItem
+from spectralEIT.bin.custom_list_item import CustomListItem
 
 class PlotableListItem(CustomListItem):
 

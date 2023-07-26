@@ -4,10 +4,10 @@ from PyQt5.QtCore import Qt, QPoint
 
 import numpy as np
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.default_config import *
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.default_config import *
 
-import cesiumEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.string_manipulation as stringManipu
 
 
 class RabiFrequencyWindow(QWidget, DefaultClass):

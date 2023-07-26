@@ -1,5 +1,5 @@
-from cesiumEIT.bin.custom_list_widget import CustomListWidget
-from cesiumEIT.bin.calc_list_item import CalcListItem
+from spectralEIT.bin.custom_list_widget import CustomListWidget
+from spectralEIT.bin.calc_list_item import CalcListItem
 
 class CalcListWidget(CustomListWidget):
 

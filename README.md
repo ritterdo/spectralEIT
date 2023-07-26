@@ -11,7 +11,7 @@ The easiest way:
    - with Anaconda inside a  cli: ```conda env create -f requirements.yaml```
    - with python directly:
      - download Python 3.11.4
-     - ```pip install -r requirements.txt```
+     - ```pip install -r requirements.txt``` or ```pip3 install -r requirements.txt```
  - inside cesiumEIT: ```python app.py``` or ```python3 app.py```
 
 ## Usage

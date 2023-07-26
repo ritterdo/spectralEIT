@@ -467,8 +467,8 @@ class ConfigurationTab(QWidget, DefaultClass):
                 lambda x, *fitpara: self.fitting_function_IoutW(x, {k:v for k,v in zip(param.keys(),fitpara)}),
                 x_data,
                 y_data,
-                p0=[param[k] for k in param.keys()],
-                bounds=([fit_params_bound[k][0] for k in param.keys()] ,[fit_params_bound[k][1] for k in param.keys()])
+                p0=[param[k] for k in param.keys()]
+                #bounds=([fit_params_bound[k][0] for k in param.keys()] ,[fit_params_bound[k][1] for k in param.keys()])
             )
         fitParams = {k:v for k,v in zip(param.keys(), fitParams)}
 

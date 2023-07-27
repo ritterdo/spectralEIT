@@ -27,7 +27,7 @@ class Material():
 
         data_dict = self.get_dict(material)
 
-        self.logger.info("Material parameters: %s", json.dumps(data_dict) if data_dict is not None else {})
+        self.logger.info("Material parameters: %s", json.dumps(data_dict, indent=2) if data_dict is not None else {})
         
         #if self.check_params(self.data_dict):
         self.set_material(material, data_dict)

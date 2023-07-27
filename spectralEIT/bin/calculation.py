@@ -26,7 +26,7 @@ class LightPropagation():
     def set_parameters(self, parameters):
         self.parameter_dict = parameters
         self.par = par(parameters)
-        self.logger.info("Calculation parameters: %s", json.dumps(parameters) if parameters is not None else {})
+        self.logger.info("Calculation parameters: %s", json.dumps(parameters, indent=2) if parameters is not None else {})
         # self.f = np.linspace(self.par.freqStart, self.par.freqStop, self.par.freqSteps)
         # self.gridSize = len(self.f)
 

@@ -21,7 +21,9 @@ class CustomListWidget(QListWidget):
 
 
     def del_item(self):
-        self.list_names.remove(self.currentItem().text())
+        name = self.currentItem().text()
+        self.logger.info("Delete item %s", name)
+        self.list_names.remove(name)
         self.takeItem(self.indexFromItem(self.currentItem()).row())
 
 
@@ -47,6 +49,7 @@ class CustomListWidget(QListWidget):
             self.addItem(tmp)
             self.setCurrentItem(tmp)
             tmp.isActivated()
+            self.logger.info("Added a new item %s", tmp_name)
         return
 
     def select_item(self, item):

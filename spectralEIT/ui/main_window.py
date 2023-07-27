@@ -131,12 +131,14 @@ class MainWindow(QMainWindow, DefaultClass):
 
 
     def show_rabi_calculator(self):
+        self.logger.info("Open rabi calculator")
         if self.rabiWindow:
             self.parWindow.close()
         self.rabiWindow = rabiWin.show()
 
 
     def show_loss_lc_calculator(self):
+        self.logger.info("Open loss lc calculator")
         if self.lossWindow:
             self.lossWindow.close()
         self.lossWindow = lossWin.show()
@@ -161,9 +163,11 @@ class MainWindow(QMainWindow, DefaultClass):
             plot_widget = self.tab_graph_widget.currentWidget()
             if x_axis_label:
                 match = re.findall(r"([a-zA-Z\s]*)[\[(a-zA-Z*)\]]?", x_axis_label)
+                self.logger.info("Change x axis label to %s[%s] for plot window %s", match[0], match[1], plot_widget.name)
                 plot_widget.setLabel(axis="bottom", text=match[0], units=match[1])
             if y_axis_label:
                 match = re.findall(r"([a-zA-Z\s]*)[\[(a-zA-Z*)\]]?", y_axis_label)
+                self.logger.info("Change y axis label to %s[%s] for plot window %s", match[0], match[1], plot_widget.name)
                 plot_widget.setLabel(axis="left", text=match[0], units=match[1])
 
 
@@ -176,12 +180,14 @@ class MainWindow(QMainWindow, DefaultClass):
     def add_plot(self):
         item = self.plotable_list.currentItem()
         plot = getattr(item.parent_item, item.text())
+        self.logger.info("Add plot %s from graph %s", item.text(), self.tab_graph_widget.currentWidget().name)
         self.tab_graph_widget.currentWidget().add_item(plot)
 
 
     def del_plot(self):
         item = self.plotted_list.currentItem()
         plot = getattr(item.parent_item, item.text())
+        self.logger.info("Delete plot %s from graph %s", item.text(), self.tab_graph_widget.currentWidget().name)
         self.tab_graph_widget.currentWidget().del_item(plot, item)
 
 

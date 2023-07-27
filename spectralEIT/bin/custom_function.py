@@ -7,7 +7,7 @@ def cesium_number_density(T):
     if T < 301.65: # ceseium melting point
         p = 10.0**(4.711 - 3999. / T)
     else:
-        p = 10.0**(4.165 - 3830. / T)#10.0**(8.232 - 4062. / T - 1.3359 * np.log(T))
+        p = 10.0**(4.165 - 3830. / T)
     return 101325.0*p/(con.kB*T)
 
 def rubidium_number_density(T):

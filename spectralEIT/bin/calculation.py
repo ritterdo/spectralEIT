@@ -78,6 +78,8 @@ class LightPropagation():
     ## Shape of the Rabi function a focused or guided strong laser beam
     def rabi_shape(self,z,w0f):
 
+        self.logger.info("Inside rabi_shape")
+
         if type(z) in LIST_TYPES:
             zet = z
         elif type(z) in NUMBER_TYPES:
@@ -153,12 +155,15 @@ class LightPropagation():
             width0 = wavelength*self.par.focalLength/np.pi/self.par.width0
             self.par.widthFocused = width0
 
+        self.logger.info("Get the Rabi frequency for either weak- or EIT-regime, current is: %s", self.par.type)
         # get the rabi frequency
         if "weak" in self.par.type:
             rabi0 = 0
         elif "EIT" in self.par.type:
+            self.logger.info("Initial Rabi frequency is, %f", self.par.rabiFrequency)
             rabi0 = self.par.rabiFrequency
 
+        self.logger.info("Set the light shape, pulse or cw, current is %s", self.par.lightShape)
         # create the light shape
         if self.par.lightShape == "pulse": # creating a pulse
 
@@ -182,6 +187,7 @@ class LightPropagation():
         else:
             raise ValueError("Error in LightPropagation in selecting the light shape: variable lightShape must be \"pulse\" or \"cw\" ")
 
+        self.logger.info("Set the propagation type, current is %s", self.par.propType)
         if self.par.propType == "focused":
             TFunction = 1
             for i,zStep in enumerate(z):
@@ -232,10 +238,14 @@ class LightPropagation():
 
     def chi_select(self, rabi=0):
         
+        self.logger.info("Inside chi_select")
+
         # print(self.materials.mat_list)
         chi = np.zeros(len(self.materials.mat_list), dtype=np.ndarray)
         
+        self.logger.info("Go through every isotope of the material if available")
         for num, material in enumerate(self.materials.mat_list):
+            self.logger.info("Current material: %s", material)
             self.mat = getattr(self.materials,material)
             # print(self.mat.__dict__)
             if "rubidium" in material:
@@ -267,6 +277,7 @@ class LightPropagation():
             
 
     def _chi_select(self, damping=1, rabi=0):
+        self.logger.info("Calculate chi with damping=%f and the Rabi frequency=%f", damping, rabi)
         # print(damping)
         # Rabi frequency in circular angles
         rabiCirc = con.circ*np.abs(rabi)
@@ -282,6 +293,7 @@ class LightPropagation():
         #transitions = [0,1,2,3]
         ret=np.zeros(len(self.par.wDet),dtype=complex)
 
+        self.logger.info("Select the type of the calculation, current is %s", self.par.type)
         # Sort out the requested calculation
         if self.par.type == "EITComplete":
             for n in self.mat.transitions:
@@ -326,6 +338,9 @@ class LightPropagation():
 
     ## Auxiliary Chi function to calculate the form of the chi for a given field or fields
     def chi_function(self,w0=0,EITDetune=0,rabi=0):
+        
+        self.logger.info("Inside chi auxiliary function with, w0=%f, EITDetune=%f, rabi=%f", w0, EITDetune, rabi)
+
         delta = -(self.par.wDet - w0 - self.par.w0Det)
         deltaEIT = EITDetune - self.par.w0Det + self.par.EITDetuneCirc
 
@@ -336,6 +351,7 @@ class LightPropagation():
         gamma31  = con.circ*(gamma_sp + self.par.gamma_coll)
         #gamma31 = 2*np.sqrt(gamma**2 + gamma/(2 * gamma_sp) * rabi**2)
 
+        self.logger.info("Select line shape, current is %s", self.par.profile)
         if self.par.profile == "voigt": # Voigt profile includes the Lorentz and Gauss shapes
             # Set up the return values
             profileReal,profileImag = np.zeros((2,gridSize))

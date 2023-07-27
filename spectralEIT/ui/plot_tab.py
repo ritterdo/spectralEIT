@@ -3,12 +3,12 @@ import sys
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QGridLayout, QTextEdit
 from PyQt5.QtCore import pyqtSignal
 
-import cesiumEIT.bin.info_windows as info
-import cesiumEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.info_windows as info
+import spectralEIT.bin.string_manipulation as stringManipu
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.material import Material as mat
-from cesiumEIT.bin.default_config import DefaultClass
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.material import Material as mat
+from spectralEIT.bin.default_config import DefaultClass
 
 import numpy as np
 import scipy.signal as sig

@@ -1,4 +1,4 @@
-from cesiumEIT.bin.constants import constants as con
+from spectralEIT.bin.constants import constants as con
 
 import numpy as np
 

@@ -5,10 +5,10 @@ import json
 
 import numpy as np
 
-from cesiumEIT.bin.exceptions import MaterialError
+from spectralEIT.bin.exceptions import MaterialError
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.materialdataclass import MaterialDataClass
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.materialdataclass import MaterialDataClass
 
 
 class Material():

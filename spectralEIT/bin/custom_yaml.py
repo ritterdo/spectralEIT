@@ -3,7 +3,7 @@ import os
 
 from importlib import import_module
 
-from cesiumEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
+from spectralEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
 
 class YamlImport():
 
@@ -19,7 +19,7 @@ class YamlImport():
 
         def load_func(string):
             module_, func = string.rsplit(".", maxsplit=1)
-            m = import_module('cesiumEIT.bin.' + module_)
+            m = import_module('spectralEIT.bin.' + module_)
             return getattr(m, func)
 
         def check_str(string):

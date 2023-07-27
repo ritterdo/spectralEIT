@@ -1,5 +1,5 @@
-from cesiumEIT.bin.calculation import LightPropagation
-from cesiumEIT.bin.data_list_item import DataListItem
+from spectralEIT.bin.calculation import LightPropagation
+from spectralEIT.bin.data_list_item import DataListItem
 
 import numpy as np
 

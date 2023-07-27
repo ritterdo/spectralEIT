@@ -2,13 +2,13 @@ import numpy as np
 
 import json
 
-import cesiumEIT.bin.auxiliary_func as aux
+import spectralEIT.bin.auxiliary_func as aux
 import logging
 
-from cesiumEIT.bin.constants import constants as con
-from cesiumEIT.bin.parameters import Parameters as par
-from cesiumEIT.bin.material import Material as mat
-from cesiumEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
+from spectralEIT.bin.constants import constants as con
+from spectralEIT.bin.parameters import Parameters as par
+from spectralEIT.bin.material import Material as mat
+from spectralEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
 
 class LightPropagation():
 

@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QTabWidget, QTabBar, QLineEdit, QToolButton, QWidget, QMessageBox
 from PyQt5.QtCore import Qt, QEvent
 
-from cesiumEIT.ui.pyplot_widget import PyPlotWidget
+from spectralEIT.ui.pyplot_widget import PyPlotWidget
 
 import logging
 

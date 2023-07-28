@@ -336,7 +336,7 @@ class LightPropagation():
             for v in np.arange(-a,a-dv,dv):
 
                 # calculation of the gauss and lorentz profile
-                gauss = (2*np.pi*U**2)**-0.5 * np.exp(-0.5*(v**2)/(U**2))
+                gauss = (2*np.pi*U**2)**-0.5 * np.exp(-1*(v**2)/(U**2))
                 if "EIT" in self.par.type:
                     lorentzReal,lorentzImag = aux.lorentz_profile_strong(delta+v,deltaEIT+v,rabi,gamma31,self.par.gammadCirc)
                 elif "weak" in self.par.type:

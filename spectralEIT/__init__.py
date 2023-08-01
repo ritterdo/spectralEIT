@@ -1,1 +1,1 @@
-name = "spectralEIT"
+name = "cesiumEIT"

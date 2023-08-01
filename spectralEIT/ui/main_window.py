@@ -11,7 +11,7 @@ import spectralEIT.bin.input_dialog as input
 import spectralEIT.bin.parameters as par
 
 from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
-from spectralEIT.bin.default_config import *
+from spectralEIT.bin.default_config import DefaultClass
 
 class MainWindow(QMainWindow, DefaultClass):
 
@@ -22,7 +22,10 @@ class MainWindow(QMainWindow, DefaultClass):
     plot_tab_changed = pyqtSignal(int)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        QMainWindow.__init__(self, *args, **kwargs)
+        DefaultClass.__init__(self, __name__)
+
+        self.logger.info("Initiate MainWindow")
 
         self.set_window_properties()
 
@@ -64,8 +67,12 @@ class MainWindow(QMainWindow, DefaultClass):
         # Initialize window variables
         self.init_windows()
 
+        self.logger.info("MainWindow successfully initiated")
+
 
     def set_window_properties(self):
+
+        self.logger.info("Set MainWindow properties")
 
         self.load_ui("mainWindow.ui")
         #self.setWindowFlags(Qt.FramelessWindowHint)
@@ -74,6 +81,8 @@ class MainWindow(QMainWindow, DefaultClass):
 
 
     def set_statusbar(self):
+
+        self.logger.info("Set MainWindow statusbar")
 
         self.statusbarMessage = QLabel()
         self.statusbarMessage.setText("Ready")
@@ -85,6 +94,9 @@ class MainWindow(QMainWindow, DefaultClass):
 
 
     def init_menu(self):
+
+        self.logger.info("Initiate MainWindow menu bar")
+
         ## Setup menu bar
         self.actionRabi_Frequency_Calculator.triggered.connect(self.show_rabi_calculator)
         self.actionLoss_LC_Calculator.triggered.connect(self.show_loss_lc_calculator)
@@ -102,25 +114,36 @@ class MainWindow(QMainWindow, DefaultClass):
     ## Close Function
     def closeEvent(self,event):
 
+        self.logger.info("Initate closing sequence")
         result = info.showQuestionBox("Confirm Exit...", "Are you sure you want to exit?")
 
         event.ignore()
+
+        # Check if calculation in configuration_tab is running
+        if self.threadIsRunning:
+            info.showInfoBox("Please wait until calculation is finished.")
+            return 
 
         if result == QMessageBox.Yes:
             if self.rabiWindow:
                 self.rabiWindow.close()
             if self.lossWindow:
                 self.lossWindow.close()
+
+            self.logger.info("Closing Application")
+            
             event.accept()
 
 
     def show_rabi_calculator(self):
+        self.logger.info("Open rabi calculator")
         if self.rabiWindow:
             self.parWindow.close()
         self.rabiWindow = rabiWin.show()
 
 
     def show_loss_lc_calculator(self):
+        self.logger.info("Open loss lc calculator")
         if self.lossWindow:
             self.lossWindow.close()
         self.lossWindow = lossWin.show()
@@ -128,7 +151,9 @@ class MainWindow(QMainWindow, DefaultClass):
 
     def update_plotted_list(self, list: list):
         self.plotted_list.clear()
+        self.logger.info("Plotted list changed to: " + "".join(item.name() for item in list))
         for item in list:
+            print(item.name())
             self.plotted_list.add_item(item)
 
 
@@ -143,26 +168,31 @@ class MainWindow(QMainWindow, DefaultClass):
             plot_widget = self.tab_graph_widget.currentWidget()
             if x_axis_label:
                 match = re.findall(r"([a-zA-Z\s]*)[\[(a-zA-Z*)\]]?", x_axis_label)
+                self.logger.info("Change x axis label to %s[%s] for plot window %s", match[0], match[1], plot_widget.name)
                 plot_widget.setLabel(axis="bottom", text=match[0], units=match[1])
             if y_axis_label:
                 match = re.findall(r"([a-zA-Z\s]*)[\[(a-zA-Z*)\]]?", y_axis_label)
+                self.logger.info("Change y axis label to %s[%s] for plot window %s", match[0], match[1], plot_widget.name)
                 plot_widget.setLabel(axis="left", text=match[0], units=match[1])
 
 
     def _plot_tab_changed(self, index):
         tab = self.tab_graph_widget.widget(index)
+        self.logger.info("Graph tab changed to %s", self.tab_graph_widget.tabText(index))
         self.update_plotted_list(tab.plotted.values())
 
 
     def add_plot(self):
         item = self.plotable_list.currentItem()
         plot = getattr(item.parent_item, item.text())
+        self.logger.info("Add plot %s from graph %s", item.text(), self.tab_graph_widget.currentWidget().name)
         self.tab_graph_widget.currentWidget().add_item(plot)
 
 
     def del_plot(self):
         item = self.plotted_list.currentItem()
         plot = getattr(item.parent_item, item.text())
+        self.logger.info("Delete plot %s from graph %s", item.text(), self.tab_graph_widget.currentWidget().name)
         self.tab_graph_widget.currentWidget().del_item(plot, item)
 
 

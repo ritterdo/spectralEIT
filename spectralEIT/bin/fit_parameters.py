@@ -15,7 +15,7 @@ loader.add_implicit_resolver(
     |\\.(?:nan|NaN|NAN))$''', re.X),
     list(u'-+0123456789.'))
 
-## working direction is ./spectralEIT/
+## working direction is ./cesiumEIT/
 fit_params_bound = yaml.safe_load(open("data/config/fitParams.yaml"))
 for key in fit_params_bound.keys():
     for i, value in enumerate(fit_params_bound[key]):

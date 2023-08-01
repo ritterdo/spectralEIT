@@ -67,7 +67,7 @@
      <x>280</x>
      <y>70</y>
      <width>311</width>
-     <height>391</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -82,7 +82,7 @@
       <x>10</x>
       <y>10</y>
       <width>291</width>
-      <height>395</height>
+      <height>321</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">

@@ -1,5 +1,7 @@
 import numpy as np
 
+import logging
+
 from os import path, listdir, getcwd
 from PyQt5 import uic
 from platform import system
@@ -9,6 +11,9 @@ ui_path = path.join(*list(path.split(getcwd())) + ["ui"])
 
 class DefaultClass:
 
+    def __init__(self, name:str = __name__):
+        self.logger = logging.getLogger(name)
+        self.logger.info("Initiate %s logger", name)
 
     def load_ui(self, name: str):
         assert name.endswith(".ui")

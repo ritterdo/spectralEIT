@@ -1,6 +1,9 @@
 import numpy as np
 
+import json
+
 import spectralEIT.bin.auxiliary_func as aux
+import logging
 
 from spectralEIT.bin.constants import constants as con
 from spectralEIT.bin.parameters import Parameters as par
@@ -11,6 +14,9 @@ class LightPropagation():
 
     def __init__(self, parameters=None):
 
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("Setting calculation in LightPropagation")
+
         if parameters == None:
             raise ValueError("No parameters were given!")
 
@@ -20,11 +26,13 @@ class LightPropagation():
     def set_parameters(self, parameters):
         self.parameter_dict = parameters
         self.par = par(parameters)
+        self.logger.info("Calculation parameters: %s", json.dumps(parameters, indent=2) if parameters is not None else {})
         # self.f = np.linspace(self.par.freqStart, self.par.freqStop, self.par.freqSteps)
         # self.gridSize = len(self.f)
 
 
     def _init_variables(self):
+        self.logger.info("Initiate variables")
         self.reset()
         self.cancelBool = False
         self.z,self.dz     = np.linspace(0,self.par.cellLength,self.par.zsteps,retstep=True)
@@ -40,6 +48,7 @@ class LightPropagation():
 
 
     def reset(self):
+        self.logger.info("Reset variables")
         if hasattr(self, "z"):
             del self.z
         if hasattr(self, "dz"):
@@ -67,7 +76,9 @@ class LightPropagation():
 
 
     ## Shape of the Rabi function a focused or guided strong laser beam
-    def rabi_shape(self,z,w0f):
+    def rabi_shape(self,z,w0f,wavelength):
+
+        self.logger.info("Inside rabi_shape")
 
         if type(z) in LIST_TYPES:
             zet = z
@@ -81,13 +92,13 @@ class LightPropagation():
         shape = np.zeros(len(zet))
         for i,dz in enumerate(zet):
             if dz < 0:
-                shape[i] = self.cell_prop(dz,w0f,"Free Space")# if (dz < 0 or dz > self.par.lcLength) else self.par.prop)
+                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)# if (dz < 0 or dz > self.par.lcLength) else self.par.prop)
                 continue
             if 0 < dz < self.par.lcLength:
-                shape[i] = self.cell_prop(dz,w0f,self.par.prop)
+                shape[i] = self.cell_prop(dz,w0f,self.par.prop,wavelength)
                 continue
             if dz < self.par.lcLength:
-                shape[i] = self.cell_prop(dz,w0f,"Free Space")
+                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)
 
         if type(z) in LIST_TYPES:
             return shape
@@ -98,9 +109,9 @@ class LightPropagation():
 
 
     ##
-    def cell_prop(self,z,w0,prop):
+    def cell_prop(self,z,w0,prop, wavelength):
         if prop == "Free Space":
-            zR = np.pi*w0**2/self.mat.wavelength
+            zR = np.pi*w0**2/wavelength
             wz = w0 * np.sqrt(1+(z/zR)**2)
             return w0**2/wz**2
         elif prop == "Light Cage":
@@ -110,6 +121,8 @@ class LightPropagation():
 
 
     def calculate(self, progress_callback=None):
+
+        self.logger.info("Starting calculation")
         
         self._init_variables()
         
@@ -119,59 +132,65 @@ class LightPropagation():
         
         k0 = getattr(self.materials,self.materials.mat_list[0]).k0
         
-        self.IoutW, self.IinW, self.IoutT, self.IinT, self.TAbs, self.chiShape, self.rabiFunction, self.t, self.z = self._calculate(wavelength, k0, progress_callback)
+        # self.IoutW, self.IinW, self.IoutT, self.IinT, self.TAbs, self.chiShape, self.rabiFunction, self.t, self.z = self._calculate(wavelength, k0, progress_callback)
+
+        # self.logger.info("Calculation finished")
 
     ## Propagation of the light through a Cesium cell with or without a waveguide
-    def _calculate(self, wavelength, k0, progress_callback=None):
+    # def _calculate(self, wavelength, k0, progress_callback=None):
         
-        z             = np.linspace(0,self.par.cellLength,self.par.zsteps)
-        rabiFunction  = np.zeros(self.par.zsteps)
-        TAbsFunctions = np.zeros([len(z),self.par.gridSize])
-        chiFunction   = np.zeros([len(z),self.par.gridSize],dtype=complex)
-        TAbs          = np.ones([self.par.gridSize])
-        IinT          = np.array([])
-        IoutT         = np.array([])
-        IinW          = np.array([])
-        IoutW         = np.array([])
-        t             = np.array([])
+        # z             = np.linspace(0,self.par.cellLength,self.par.zsteps)
+        # rabiFunction  = np.zeros(self.par.zsteps)
+        # TAbsFunctions = np.zeros([len(z),self.par.gridSize])
+        # chiFunction   = np.zeros([len(z),self.par.gridSize],dtype=complex)
+        # TAbs          = np.ones([self.par.gridSize])
+        # IinT          = np.array([])
+        # IoutT         = np.array([])
+        # IinW          = np.array([])
+        # IoutW         = np.array([])
+        # t             = np.array([])
 
         width0 = self.par.width0
         if self.par.propType == "focused":
             width0 = wavelength*self.par.focalLength/np.pi/self.par.width0
             self.par.widthFocused = width0
 
+        self.logger.info("Get the Rabi frequency for either weak- or EIT-regime, current is: %s", self.par.type)
         # get the rabi frequency
         if "weak" in self.par.type:
             rabi0 = 0
         elif "EIT" in self.par.type:
+            self.logger.info("Initial Rabi frequency is, %f", self.par.rabiFrequency)
             rabi0 = self.par.rabiFrequency
 
+        self.logger.info("Set the light shape, pulse or cw, current is %s", self.par.lightShape)
         # create the light shape
         if self.par.lightShape == "pulse": # creating a pulse
 
             df = 2*np.max(self.par.f)/self.par.gridSize # frequency sampling
-            t = 1/df*np.arange(-self.par.gridSize/2,self.par.gridSize/2)/self.par.gridSize
+            self.t = 1/df*np.arange(-self.par.gridSize/2,self.par.gridSize/2)/self.par.gridSize
             # print(self.t)
-            dt = 2*np.max(t)/np.size(t)
+            dt = 2*np.max(self.t)/np.size(self.t)
 
             if self.par.type == "EITStandalone":
                 pulseFreq = 0
             else:
                 pulseFreq = self.par.pulseFreq
 
-            E = aux.GaussPulse(t,self.par.dt/(2*np.sqrt(2*np.log(2))),pulseFreq) # get the gauss pulse in the time domain
-            IinT = np.abs(E)**2
+            E = aux.GaussPulse(self.t,self.par.dt/(2*np.sqrt(2*np.log(2))),pulseFreq) # get the gauss pulse in the time domain
+            self.IinT = np.abs(E)**2
             E = np.fft.fftshift(np.fft.fft(E)*dt) # fourier transfer the gauss pulse into the frequency domain
-            IinW = np.abs(E)**2#/np.max(nabs(E)**2)
+            self.IinW = np.abs(E)**2#/np.max(nabs(E)**2)
 
         elif self.par.lightShape == "cw": # create a continous wave
             E = 1
         else:
             raise ValueError("Error in LightPropagation in selecting the light shape: variable lightShape must be \"pulse\" or \"cw\" ")
 
+        self.logger.info("Set the propagation type, current is %s", self.par.propType)
         if self.par.propType == "focused":
             TFunction = 1
-            for i,zStep in enumerate(z):
+            for i,zStep in enumerate(self.z):
                 if self.cancelBool == True:
                     self.reset()
                     return 0
@@ -179,16 +198,16 @@ class LightPropagation():
                     progress_callback.emit(self.text(), int(100*zStep/self.par.cellLength))
                 # get the rabi frequency
                 if "EIT" in self.par.type:
-                    shape = self.rabi_shape(zStep,width0)
+                    shape = self.rabi_shape(zStep,width0,wavelength)
                     rabi = rabi0*shape
                     chi_e = self.chi_select(rabi)
-                    rabiFunction[i] = rabi
+                    self.rabiFunction[i] = rabi
                 else:
                     raise ValueError("Error in LightPropagation: if the light is focused, the propagation type should be EIT!")
                 n = np.sqrt(1 + chi_e) # get the refraction index
-                chiFunction[i]  = chi_e
-                TFunction *= np.exp(1j*self.mat.k0*n*self.dz)
-                TAbsFunctions[i] = np.abs(TFunction)
+                self.chiFunction[i]  = chi_e
+                TFunction *= np.exp(1j*k0*n*self.dz)
+                self.TAbsFunctions[i] = np.abs(TFunction)
                 rabi = rabi0
         elif self.par.propType == "unfocused":
             rabi = rabi0
@@ -196,33 +215,40 @@ class LightPropagation():
                 chi_e = self.chi_select(rabi)
             else:
                 chi_e = self.chi_select()
-            chiShape = chi_e
+            self.chiShape = chi_e
             n = np.sqrt(1 + chi_e)
             TFunction = np.exp(1j*k0*n*self.par.cellLength)
         else:
             raise ValueError("Error in LightPropagation in focusing selection!")
         E *= TFunction
-        TAbs = np.abs(TFunction)
+        self.TAbs = np.abs(TFunction)
 
         # get the intensities
         if self.par.lightShape == "pulse":
-            IoutW = np.abs(E)**2/np.max(IinW)
-            IinW /= np.max(IinW)
-            IoutT = np.abs(np.fft.ifft(E)/dt)**2/np.max(IinT)
-            IinT /= np.max(IinT)
+            self.IoutW = np.abs(E)**2/np.max(self.IinW)
+            self.IinW /= np.max(self.IinW)
+            self.IoutT = np.abs(np.fft.ifft(E)/dt)**2/np.max(self.IinT)
+            self.IinT /= np.max(self.IinT)
         elif self.par.lightShape == "cw":
-            IoutW = np.abs(E)**2
+            self.IoutW = np.abs(E)**2
 
         # return np.array([E, IinW, IinT, TAbs, chiShape, rabiFunction, t, z], dtype=object)
-        return np.array([IoutW, IoutT, IinW, IinT, TAbs, chiShape, rabiFunction, t, z], dtype=object)
+        # if self.par.propType == "focused":
+        #     return np.array([IoutW, IoutT, IinW, IinT, TAbs, rabiFunction, TAbsFunctions, chiFunction, t, z], dtype=object)
+        # elif self.par.propType == "unfocused":
+        #     return np.array([IoutW, IoutT, IinW, IinT, TAbs, chiShape, rabiFunction, t, z], dtype=object)
 
 
     def chi_select(self, rabi=0):
         
+        self.logger.info("Inside chi_select")
+
         # print(self.materials.mat_list)
         chi = np.zeros(len(self.materials.mat_list), dtype=np.ndarray)
         
+        self.logger.info("Go through every isotope of the material if available")
         for num, material in enumerate(self.materials.mat_list):
+            self.logger.info("Current material: %s", material)
             self.mat = getattr(self.materials,material)
             # print(self.mat.__dict__)
             if "rubidium" in material:
@@ -254,6 +280,7 @@ class LightPropagation():
             
 
     def _chi_select(self, damping=1, rabi=0):
+        self.logger.info("Calculate chi with damping=%f and the Rabi frequency=%f", damping, rabi)
         # print(damping)
         # Rabi frequency in circular angles
         rabiCirc = con.circ*np.abs(rabi)
@@ -269,6 +296,7 @@ class LightPropagation():
         #transitions = [0,1,2,3]
         ret=np.zeros(len(self.par.wDet),dtype=complex)
 
+        self.logger.info("Select the type of the calculation, current is %s", self.par.type)
         # Sort out the requested calculation
         if self.par.type == "EITComplete":
             for n in self.mat.transitions:
@@ -313,6 +341,9 @@ class LightPropagation():
 
     ## Auxiliary Chi function to calculate the form of the chi for a given field or fields
     def chi_function(self,w0=0,EITDetune=0,rabi=0):
+        
+        self.logger.info("Inside chi auxiliary function with, w0=%f, EITDetune=%f, rabi=%f", w0, EITDetune, rabi)
+
         delta = -(self.par.wDet - w0 - self.par.w0Det)
         deltaEIT = EITDetune - self.par.w0Det + self.par.EITDetuneCirc
 
@@ -324,6 +355,7 @@ class LightPropagation():
         gamma31 = gamma_sp + self.par.gamma_coll
         #gamma31 = 2*np.sqrt(gamma**2 + gamma/(2 * gamma_sp) * rabi**2)
 
+        self.logger.info("Select line shape, current is %s", self.par.profile)
         if self.par.profile == "voigt": # Voigt profile includes the Lorentz and Gauss shapes
             # Set up the return values
             profileReal,profileImag = np.zeros((2,gridSize))

@@ -17,7 +17,10 @@ class MeasurementTab(QWidget, DefaultClass):
     sigSetPoints = pyqtSignal(str,list)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        QWidget.__init__(self, *args, **kwargs)
+        DefaultClass.__init__(self, __name__)
+
+        self.logger.info("Initiate MeasurementTab")
 
         self.load_ui("measurementTab.ui")
 
@@ -72,6 +75,7 @@ class MeasurementTab(QWidget, DefaultClass):
 
     def set_current_import(self, item):
         self.current_import = item
+        self.logger.info("Set current_import to %s", item.text())
 
 
     def set_default_values(self):
@@ -97,12 +101,14 @@ class MeasurementTab(QWidget, DefaultClass):
 
 
     def inverse_data(self) -> None:
+        self.logger.info("Inverse the data of %s", self.current_import.text())
         try:
             if self.current_import.reference.any():
                 self.current_import.reference = self.current_import.inverse_value(self.current_import.reference)
             if self.current_import.spectrum.any():
                 self.current_import.spectrum = self.current_import.inverse_value(self.current_import.spectrum)
             self.current_import.update_item()
+            self.logger.info("Inversion successful")
             return None
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())
@@ -110,6 +116,7 @@ class MeasurementTab(QWidget, DefaultClass):
 
 
     def initial_cut(self) -> None:
+        self.logger.info("Inital cut/Main area cut out of %s", self.current_import.text())
         try:
             cut_str = self.textEdit_main_area.toPlainText()
             if cut_str == "":
@@ -124,6 +131,7 @@ class MeasurementTab(QWidget, DefaultClass):
             if self.current_import.frequency.any():
                 self.current_import.frequency = self.current_import.initial_cut(self.current_import.frequency, cut = main_area)
             self.current_import.update_item()
+            self.logger.info("Initial cut/Main area cut out successful")
             return None
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())
@@ -131,6 +139,7 @@ class MeasurementTab(QWidget, DefaultClass):
 
 
     def reset_data(self) -> None:
+        self.logger.info("Reset data for %s", self.current_import.text())
         try:
             self.current_import.set_data()
             self.current_import.update_item()
@@ -140,6 +149,7 @@ class MeasurementTab(QWidget, DefaultClass):
 
 
     def modify_x(self) -> None:
+        self.logger.info("Modify X from Volt to frequency for %s", self.current_import.text())
         try:
             initial_guess = {"initial_offset_x":np.array([float(x) for x in self.textEdit_ref_peaks.toPlainText().split(",")]),
                 "initial_offset_y":0,
@@ -151,12 +161,14 @@ class MeasurementTab(QWidget, DefaultClass):
             self.window().update_plotable(self.current_import)
 
             self.window().tab_graph_widget.currentWidget().remove_selection_lines()
+            self.logger.info("Modification successful")
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())
             return
 
 
     def remove_background(self) -> None:
+        self.logger.info("Removing background for %s", self.current_import.text())
         try:
             cut1 = self.textEdit_peaks_area_1.toPlainText()
             cut2 = self.textEdit_peaks_area_2.toPlainText()
@@ -180,12 +192,14 @@ class MeasurementTab(QWidget, DefaultClass):
             # self.current_import.spectrum = self.current_import.remove_background(self.current_import.frequency,self.current_import.spectrum, set = "spectrum")
             self.current_import.update_item()
             self.window().update_plotable(self.current_import)
+            self.logger.info("Removal successful")
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())
             return
 
 
     def subsampling(self):
+        self.logger.info("Subsampling for %s", self.current_import.text())
         try:
 
             sample_area = self.textEdit_sampling_area.toPlainText()
@@ -209,7 +223,10 @@ class MeasurementTab(QWidget, DefaultClass):
                 sampling = 10
             else:
                 sampling = int(sampling)
-
+ 
+            self.logger.info("Sampling area: [%f,%f]", sample_area[0], sample_area[1])
+            self.logger.info("High resolution area: [%f,%f]", highres_area[0], highres_area[1])
+ 
             self.current_import.f_sub,self.current_import.spectrum_sub = self.current_import.subsampling(x, y, highres_area, sampling)
             self.current_import.update_item()
             self.window().update_plotable(self.current_import)

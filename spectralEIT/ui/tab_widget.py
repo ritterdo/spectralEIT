@@ -4,10 +4,15 @@ from PyQt5.QtCore import Qt, QEvent
 
 from spectralEIT.ui.pyplot_widget import PyPlotWidget
 
+import logging
+
 class GraphTabWidget(QTabWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("Initiate GraphTabWidget")
 
         tabBar = GraphTabBar(self)
         self.setTabBar(tabBar)
@@ -15,8 +20,11 @@ class GraphTabWidget(QTabWidget):
         self.currentChanged.connect(lambda: self.window().plot_tab_changed.emit(self.currentIndex()))
 
         ## Add standart widgets
+        self.logger.info("Adding default tabs Frequency")
         self.addTab(name="Frequency", labels={"bottom":("Frequency", "Hz"), "left":"Transmission"})
+        self.logger.info("Adding default tabs Time")
         self.addTab(name="Time", labels={"bottom":("Time", "s"), "left":("Intensity", "a.u.")})
+        self.logger.info("Adding default tabs Space")
         self.addTab(name="Space", labels={"bottom":("Distance", "m"), "left":("Rabi-Frequncy", "Hz")})
 
 
@@ -27,6 +35,7 @@ class GraphTabWidget(QTabWidget):
 
 
     def setTabText(self, index, name):
+        self.logger.info("Change name of tag %d to %s", index, name)
         self.widget(index).name = name
         super().setTabText(index, name)
 

@@ -11,6 +11,8 @@ os.environ["QT_MAC_WANTS_LAYER"] = "1"
 
 from spectralEIT.ui.main_window import MainWindow
 
+import spectralEIT.bin.log as log
+
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QFile, QTextStream
 
@@ -19,6 +21,10 @@ import platform
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 def main():
+    
+    logger = log.get_logger()
+    logger.info("Application Starts")
+
     # QApplication.setGraphicsSystem("raster")
     app = QApplication(sys.argv)
 
@@ -48,7 +54,7 @@ def main():
     window.show()
 
     # Start the event loop.
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
     # app.exec_()
 
 if __name__ == "__main__":

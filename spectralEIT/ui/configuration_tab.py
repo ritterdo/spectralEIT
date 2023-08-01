@@ -6,6 +6,8 @@ from PyQt5 import uic
 
 from scipy.optimize import curve_fit
 
+import numpy as np
+
 import spectralEIT.bin.info_windows as info
 import spectralEIT.bin.string_manipulation as stringManipu
 import spectralEIT.bin.workers as workers
@@ -14,14 +16,17 @@ import spectralEIT.bin.calculation as calc
 from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
 from spectralEIT.bin.fit_parameters import fit_params_bound, fit_params_list
 from spectralEIT.bin.exceptions import ThreadError
-from spectralEIT.bin.default_config import *
+from spectralEIT.bin.default_config import DefaultClass, NUMBER_TYPES, PAR_DICT_INT_TYPE
 
 class ConfigurationTab(QWidget, DefaultClass):
 
 
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        QWidget.__init__(self, *args, **kwargs)
+        DefaultClass.__init__(self, __name__)
+
+        self.logger.info("Initiate ConfigurationTab")
 
         self.load_ui("configurationTab.ui")
 
@@ -315,6 +320,7 @@ class ConfigurationTab(QWidget, DefaultClass):
     ##                        ##
     ############################
     def start_calculation(self):
+        self.logger.info("Starting Calculation")
         if self.window().calc_list.count() == 0:
             self.window().calc_list.add_item(
                     _parent = self.window().calc_list,
@@ -322,10 +328,11 @@ class ConfigurationTab(QWidget, DefaultClass):
                     item_name = "calc"
                 )
         name = self.window().calc_list.currentItem().text()
+        self.logger.info("CALCULATION: Calculation name: %s", name)
         try:
             if name in self.window().threadIsRunning.keys():
-                raise ThreadError("Calculation already running")
-        except Exception:
+                raise ThreadError("CALCULATION: Calculation already running")
+        except Exception as e:
             info.showCriticalErrorBox(sys.exc_info())
             return
         self.window().threadIsRunning[name] = True
@@ -338,6 +345,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.window().statusbar.addWidget(tmp)
 
         try:
+            self.logger.info("CALCULATION: Setting up working thread")
             # setattr(self, "worker_{}".format(name), workers.Worker(self.calculation_function, objectName = name))
             # worker = getattr(self, "worker_{}".format(name))
             worker = workers.Worker(self.calculation_function, objectName = name)
@@ -345,10 +353,12 @@ class ConfigurationTab(QWidget, DefaultClass):
             worker.signals.finished.connect(self.calculation_finished_function)
             worker.signals.progress.connect(self.calculation_progress_function)
             worker.signals.error.connect(self.calculation_error_function)
-        except Exception:
-            raise Exception
+        except Exception as e:
+            self.logger.exception("CALCULATION: An error occured with the worker: %s", str(e))
+            raise e
             return
 
+        self.logger.info("CALCULATION: Starting worker %s", name)
         self.window().threadpool.start(worker)
 
 
@@ -370,7 +380,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         delattr(self, "progressBar_{}".format(name))
 
         self.window().threadIsRunning.pop(name)
-        info.showInfoBox("Calculation finished of parameter set {}!".format(name))
+        info.showInfoBox("CALCULATION: Finished of parameter set {}!".format(name))
 
 
     def calculation_finished_function(self):
@@ -399,6 +409,8 @@ class ConfigurationTab(QWidget, DefaultClass):
     ############################
     def start_fitting(self):
 
+        self.logger.info("Start fitting")
+
         try:
             calc_name = self.window().calc_list.currentItem().text()
             plotable_item = self.window().plotable_list.currentItem()
@@ -411,29 +423,34 @@ class ConfigurationTab(QWidget, DefaultClass):
             self.textEdit_par_freqStart.setText(str(np.min(freq)))
             self.textEdit_par_freqStop.setText(str(np.max(freq)))
             self.textEdit_par_freqSteps.setText(str(len(freq)))
-        except AttributeError:
-            info.showCriticalMessageBox("Error: Did you select a measurement to fit?\n\nThe measurement must be the current selected item in the 'Plotable Item List'.")
-        except Exception:
+        except AttributeError as e:
+            info.showCriticalMessageBox("FITTING: Error: Did you select a measurement to fit?\n\nThe measurement must be the current selected item in the 'Plotable Item List'.")
+            return
+        except Exception as e:
             info.showCriticalErrorBox(sys.exc_info())
             return
+
+        self.logger.info("FITTING: Fitting of measurement %s with the calculation %s", plotable_item.text(), calc_name)
 
         try:
             if "fit_{}".format(calc_name) in self.window().threadIsRunning.keys():
-                raise ThreadError("Calculation already running")
-        except Exception:
+                raise ThreadError("FITTING: Calculation already running")
+        except Exception as e:
             info.showCriticalErrorBox(sys.exc_info())
             return
 
         try:
+            self.logger.info("FITTING: Setting up working thread")
             worker = workers.Worker(self.fitting_start, measurement, objectName=calc_name)
             worker.signals.result.connect(self.fitting_result)
             worker.signals.finished.connect(self.fitting_finished)
             worker.signals.progress.connect(self.fitting_progress)
             worker.signals.error.connect(self.fitting_error)
         except Exception as e:
-            self.fitting_error(e, calc_name)
+            self.fitting_error(sys.exec_info(), calc_name)
             return
 
+        self.logger.info("FITTING: Starting worker %s", calc_name)
         try:
             self.window().threadpool.start(worker)
         except Exception as e:
@@ -456,7 +473,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         if checkedParams:
             param = self.get_parameters(par_list=checkedParams)
         else:
-            raise ValueError("checkedParams in fitting function where not set! Please check the fit parameters.")
+            raise ValueError("FITTING: checkedParams in fitting function where not set! Please check the fit parameters.")
 
         self.window().threadIsRunning["fit_{}".format(objectName)] = True
         self.window().statusbarMessage.setText("Calculating...")
@@ -467,8 +484,8 @@ class ConfigurationTab(QWidget, DefaultClass):
                 lambda x, *fitpara: self.fitting_function_IoutW(x, {k:v for k,v in zip(param.keys(),fitpara)}),
                 x_data,
                 y_data,
-                p0=[param[k] for k in param.keys()]
-                #bounds=([fit_params_bound[k][0] for k in param.keys()] ,[fit_params_bound[k][1] for k in param.keys()])
+                p0=[param[k] for k in param.keys()],
+                bounds=([fit_params_bound[k][0] for k in param.keys()] ,[fit_params_bound[k][1] for k in param.keys()])
             )
         fitParams = {k:v for k,v in zip(param.keys(), fitParams)}
 
@@ -505,7 +522,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.window().calc_list.itemChanged.emit(item)
         self.load_parameters(par_dict=item.parameter_dict)
         self.window().threadIsRunning.pop("fit_{}".format(name))
-        info.showInfoBox("Calculation finished of parameter set {}!".format("fit_{}".format(name)))
+        info.showInfoBox("FITTING: Calculation finished of parameter set {}!".format("fit_{}".format(name)))
 
 
     def fitting_finished(self):

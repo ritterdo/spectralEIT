@@ -64,7 +64,7 @@
           <property name="maximumSize">
            <size>
             <width>660</width>
-            <height>800</height>
+            <height>737</height>
            </size>
           </property>
           <property name="verticalScrollBarPolicy">
@@ -78,8 +78,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>643</width>
-             <height>746</height>
+             <width>658</width>
+             <height>725</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -460,13 +460,13 @@
                 <property name="minimumSize">
                  <size>
                   <width>604</width>
-                  <height>640</height>
+                  <height>575</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
                   <width>604</width>
-                  <height>640</height>
+                  <height>575</height>
                  </size>
                 </property>
                 <property name="layoutDirection">
@@ -513,7 +513,7 @@
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
+           <enum>QSizePolicy::Maximum</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -677,7 +677,7 @@
      <x>0</x>
      <y>0</y>
      <width>1563</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="sizePolicy">

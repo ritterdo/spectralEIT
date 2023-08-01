@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>603</width>
-    <height>640</height>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
-     <height>637</height>
+     <width>610</width>
+     <height>551</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -32,9 +32,6 @@
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::MinimumExpanding</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -208,24 +205,28 @@
         </property>
        </widget>
       </item>
+      <item>
+       <spacer name="horizontalSpacer_9">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="label_parameterbox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>150</width>
-          <height>16777215</height>
-         </size>
-        </property>
         <property name="text">
          <string>Propagation Parameter</string>
         </property>
@@ -236,12 +237,9 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>80</width>
+          <width>40</width>
           <height>20</height>
          </size>
         </property>
@@ -249,37 +247,29 @@
       </item>
       <item>
        <widget class="QLabel" name="label_9">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>16777215</height>
-         </size>
-        </property>
         <property name="text">
          <string>Fit</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_chibox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="maximumSize">
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>150</width>
-          <height>16777215</height>
+          <width>40</width>
+          <height>20</height>
          </size>
         </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_chibox">
         <property name="text">
          <string>Chi Parameter</string>
         </property>
@@ -289,9 +279,6 @@
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -304,21 +291,31 @@
       <item>
        <widget class="QLabel" name="label_10">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>60</width>
-          <height>16777215</height>
-         </size>
         </property>
         <property name="text">
          <string>Fit</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -346,12 +343,6 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>25</height>
-              </size>
-             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -373,14 +364,9 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
              </property>
              <item>
               <property name="text">
@@ -404,13 +390,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -483,12 +469,6 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>20</height>
-              </size>
-             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -545,13 +525,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -572,13 +552,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -599,13 +579,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -626,13 +606,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -669,13 +649,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -712,13 +692,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -929,13 +909,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -972,13 +952,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -990,14 +970,9 @@
             <widget class="QComboBox" name="comboBox_lightShape">
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
              </property>
              <item>
               <property name="text">
@@ -1021,14 +996,9 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
              </property>
              <item>
               <property name="text">
@@ -1068,13 +1038,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -1092,13 +1062,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -1135,13 +1105,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>140</width>
                <height>25</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -1288,13 +1258,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1334,14 +1304,9 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
                </property>
                <item>
                 <property name="text">
@@ -1458,13 +1423,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1504,13 +1469,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1531,13 +1496,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1558,13 +1523,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1623,13 +1588,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1666,14 +1631,9 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
                </property>
                <item>
                 <property name="text">
@@ -1748,14 +1708,9 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
                </property>
               </widget>
              </item>
@@ -1804,13 +1759,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1831,13 +1786,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -1877,13 +1832,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>140</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>8</pointsize>
                 </font>
                </property>
                <property name="cursor" stdset="0">
@@ -2037,6 +1992,19 @@
          </spacer>
         </item>
        </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>

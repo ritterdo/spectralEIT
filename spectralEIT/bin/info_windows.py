@@ -3,6 +3,10 @@ from PyQt5.QtCore import Qt
 
 from traceback import format_exception
 
+import logging
+
+logger = logging.getLogger("MessageBox")
+
 def showCriticalMessageBox(message):
     msg = QMessageBox()
     msg.setIcon(QMessageBox.Critical)
@@ -13,8 +17,11 @@ def showCriticalMessageBox(message):
     # setting Message box window title
     msg.setWindowTitle("Critical Error")
 
+    # log event
+    logger.error("Critical Error: " + message)
+
     # declaring buttons on Message Box
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    msg.setStandardButtons(QMessageBox.Ok)
 
     # start the app
     retval = msg.exec_()
@@ -23,15 +30,19 @@ def showCriticalErrorBox(e, message=""):
     exc_type, exc_val, tb = e
     msg = QMessageBox()
     msg.setIcon(QMessageBox.Critical)
+    error_msg = "Critical Error: " + message + "\n".join(format_exception(exc_type, exc_val, tb)) + "\n"
 
     # setting message for Message Box
-    msg.setText("Critical Error: " + message + "\n" + "".join(format_exception(exc_type, exc_val, tb)))#str(e.args))
+    msg.setText(error_msg)
 
     # setting Message box window title
     msg.setWindowTitle(type(e).__name__)
 
+    # log event
+    logger.error(error_msg)
+
     # declaring buttons on Message Box
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    msg.setStandardButtons(QMessageBox.Ok)
 
     # start the app
     retval = msg.exec_()
@@ -45,6 +56,9 @@ def showInfoBox(message):
 
     # setting Message box window title
     msg.setWindowTitle("Info Box")
+
+    # log event
+    logger.info(message)
 
     # declaring buttons on Message Box
     msg.setStandardButtons(QMessageBox.Ok)

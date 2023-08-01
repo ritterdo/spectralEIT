@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QPoint
 import numpy as np
 
 from spectralEIT.bin.constants import constants as con
-from spectralEIT.bin.default_config import *
+from spectralEIT.bin.default_config import DefaultClass
 
 import spectralEIT.bin.string_manipulation as stringManipu
 

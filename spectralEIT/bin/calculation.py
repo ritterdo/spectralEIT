@@ -27,8 +27,6 @@ class LightPropagation():
         self.parameter_dict = parameters
         self.par = par(parameters)
         self.logger.info("Calculation parameters: %s", json.dumps(parameters, indent=2) if parameters is not None else {})
-        # self.f = np.linspace(self.par.freqStart, self.par.freqStop, self.par.freqSteps)
-        # self.gridSize = len(self.f)
 
 
     def _init_variables(self):
@@ -92,7 +90,7 @@ class LightPropagation():
         shape = np.zeros(len(zet))
         for i,dz in enumerate(zet):
             if dz < 0:
-                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)# if (dz < 0 or dz > self.par.lcLength) else self.par.prop)
+                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)
                 continue
             if 0 < dz < self.par.lcLength:
                 shape[i] = self.cell_prop(dz,w0f,self.par.prop,wavelength)
@@ -132,23 +130,6 @@ class LightPropagation():
         
         k0 = getattr(self.materials,self.materials.mat_list[0]).k0
         
-        # self.IoutW, self.IinW, self.IoutT, self.IinT, self.TAbs, self.chiShape, self.rabiFunction, self.t, self.z = self._calculate(wavelength, k0, progress_callback)
-
-        # self.logger.info("Calculation finished")
-
-    ## Propagation of the light through a Cesium cell with or without a waveguide
-    # def _calculate(self, wavelength, k0, progress_callback=None):
-        
-        # z             = np.linspace(0,self.par.cellLength,self.par.zsteps)
-        # rabiFunction  = np.zeros(self.par.zsteps)
-        # TAbsFunctions = np.zeros([len(z),self.par.gridSize])
-        # chiFunction   = np.zeros([len(z),self.par.gridSize],dtype=complex)
-        # TAbs          = np.ones([self.par.gridSize])
-        # IinT          = np.array([])
-        # IoutT         = np.array([])
-        # IinW          = np.array([])
-        # IoutW         = np.array([])
-        # t             = np.array([])
 
         width0 = self.par.width0
         if self.par.propType == "focused":
@@ -165,12 +146,16 @@ class LightPropagation():
 
         self.logger.info("Set the light shape, pulse or cw, current is %s", self.par.lightShape)
         # create the light shape
-        if self.par.lightShape == "pulse": # creating a pulse
+        if self.par.lightShape == "pulse":
 
-            df = 2*np.max(self.par.f)/self.par.gridSize # frequency sampling
+            self.logger.info("Creating a pulse")
+
+            df = 2*np.max(self.par.f)/self.par.gridSize 
+            self.logger.info("df is %f", df)
             self.t = 1/df*np.arange(-self.par.gridSize/2,self.par.gridSize/2)/self.par.gridSize
             # print(self.t)
             dt = 2*np.max(self.t)/np.size(self.t)
+            self.logger.info("dt is %f", dt)
 
             if self.par.type == "EITStandalone":
                 pulseFreq = 0
@@ -191,7 +176,9 @@ class LightPropagation():
         if self.par.propType == "focused":
             TFunction = 1
             for i,zStep in enumerate(self.z):
+                self.logger.info("Current zStep is %f", zStep)
                 if self.cancelBool == True:
+                    self.logger.info("Calculation cancelled")
                     self.reset()
                     return 0
                 if progress_callback != None:
@@ -232,11 +219,7 @@ class LightPropagation():
         elif self.par.lightShape == "cw":
             self.IoutW = np.abs(E)**2
 
-        # return np.array([E, IinW, IinT, TAbs, chiShape, rabiFunction, t, z], dtype=object)
-        # if self.par.propType == "focused":
-        #     return np.array([IoutW, IoutT, IinW, IinT, TAbs, rabiFunction, TAbsFunctions, chiFunction, t, z], dtype=object)
-        # elif self.par.propType == "unfocused":
-        #     return np.array([IoutW, IoutT, IinW, IinT, TAbs, chiShape, rabiFunction, t, z], dtype=object)
+        self.logger.info("Calculation finished")
 
 
     def chi_select(self, rabi=0):
@@ -281,17 +264,15 @@ class LightPropagation():
 
     def _chi_select(self, damping=1, rabi=0):
         self.logger.info("Calculate chi with damping=%f and the Rabi frequency=%f", damping, rabi)
-        # print(damping)
         # Rabi frequency in circular angles
         rabiCirc = con.circ*np.abs(rabi)
-        #rabiProbeCirc = con.circ*np.abs(rabiProbe)
 
         # Get the pre factors for the chi
         N = self.mat.number_density(self.par.Tk) / (2*(2*self.mat.I+1)) # number density
-        # print(N*(2*(2*self.mat.I+1)))
         preFactor = damping * N * self.mat.d02 / (con.ep0 * con.hbar) # prefactor
-        # print(preFactor)
-        # print(self.mat.dFactor)
+        self.logger.info("Prefactor is %f", preFactor)
+        self.logger.info("Number density is %f", N)
+        self.logger.info("d02 is %f", self.mat.d02)
 
         #transitions = [0,1,2,3]
         ret=np.zeros(len(self.par.wDet),dtype=complex)
@@ -351,9 +332,7 @@ class LightPropagation():
 
         gamma_sp = self.mat.natGamma if "EIT" in self.par.type else self.mat.natGamma/2
 
-        #gamma31  = con.circ*(gamma_sp + self.par.gamma_coll)
         gamma31 = gamma_sp + self.par.gamma_coll
-        #gamma31 = 2*np.sqrt(gamma**2 + gamma/(2 * gamma_sp) * rabi**2)
 
         self.logger.info("Select line shape, current is %s", self.par.profile)
         if self.par.profile == "voigt": # Voigt profile includes the Lorentz and Gauss shapes

@@ -119,6 +119,11 @@ class MainWindow(QMainWindow, DefaultClass):
 
         event.ignore()
 
+        # Check if calculation in configuration_tab is running
+        if self.threadIsRunning:
+            info.showInfoBox("Please wait until calculation is finished.")
+            return 
+
         if result == QMessageBox.Yes:
             if self.rabiWindow:
                 self.rabiWindow.close()

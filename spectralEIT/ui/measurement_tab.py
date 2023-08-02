@@ -75,6 +75,7 @@ class MeasurementTab(QWidget, DefaultClass):
 
     def set_current_import(self, item):
         self.current_import = item
+        self.lineEdit_imported_data_size.setText(str(len(item.frequency)))
         self.logger.info("Set current_import to %s", item.text())
 
 

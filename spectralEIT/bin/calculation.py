@@ -124,7 +124,11 @@ class LightPropagation():
         
         self._init_variables()
         
-        self.materials = mat(self.par.material)
+        if hasattr(self, "materials"): 
+            if self.materials.name != self.par.material:
+                self.materials = mat(self.par.material)
+        else:
+            self.materials = mat(self.par.material)
         
         wavelength = getattr(self.materials,self.materials.mat_list[0]).wavelength
         

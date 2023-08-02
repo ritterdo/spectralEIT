@@ -88,56 +88,60 @@ class PlotTab(QWidget, DefaultClass):
 
         self.logger.info("Set peaks")
 
-        ## Select material
-        material = mat(self.comboBox_material.currentText())
+        try:
+            ## Select material
+            material = mat(self.comboBox_material.currentText())
 
-        if not any(self.plot_item.x_peaks):
-            self.get_peaks()
+            if not any(self.plot_item.x_peaks):
+                self.get_peaks()
 
-        frame = self.scroll_plot_properties
-        layout = frame.layout()
-        if not layout:
-            layout = QGridLayout()
-            frame.setLayout(layout)
-        else:
-            for i in reversed(range(2,layout.count())):
-                layout.itemAt(i).widget().setParent(None)
+            frame = self.scroll_plot_properties
+            layout = frame.layout()
+            if not layout:
+                layout = QGridLayout()
+                frame.setLayout(layout)
+            else:
+                for i in reversed(range(2,layout.count())):
+                    layout.itemAt(i).widget().setParent(None)
 
-        style =  "border: 1px solid #76797C;"
-        textEditStyle = "background-color: #232629; color: #eff0f1;"
+            style =  "border: 1px solid #76797C;"
+            textEditStyle = "background-color: #232629; color: #eff0f1;"
 
-        label = QLabel("Theoretical")
-        label.setStyleSheet(style)
-        layout.addWidget(label, 0, 1)
-
-        label = QLabel("From Plot")
-        label.setStyleSheet(style)
-        layout.addWidget(label, 0, 2)
-
-        for i in range(self.plot_item.x_peaks.size):
-
-            self.logger.info("Add peak %d to plot properties", i+1)
-
-            label = QLabel("x"+str(i+1))
+            label = QLabel("Theoretical")
             label.setStyleSheet(style)
-            layout.addWidget(label, i+1, 0)
+            layout.addWidget(label, 0, 1)
 
-            label = QLabel(stringManipu.format_float_to_scale(material.Hf[i], 2))
-            label.setStyleSheet(style+textEditStyle)
-            layout.addWidget(label, i+1, 1)
+            label = QLabel("From Plot")
+            label.setStyleSheet(style)
+            layout.addWidget(label, 0, 2)
 
-            label = QLabel(stringManipu.format_float_to_scale(self.plot_item.x_peaks[i], 2))
-            label.setStyleSheet(style+textEditStyle)
-            layout.addWidget(label, i+1, 2)
-            if i+1 == self.plot_item.x_peaks.size:
-                button = QPushButton("Show")
-                button.clicked.connect(self.show_theoretical_peaks)
-                layout.addWidget(button, i+2, 1)
+            for i in range(self.plot_item.x_peaks.size):
 
-                button = QPushButton("Show")
-                button.clicked.connect(self.show_experimental_peaks)
-                layout.addWidget(button, i+2, 2)
+                self.logger.info("Add peak %d to plot properties", i+1)
 
+                label = QLabel("x"+str(i+1))
+                label.setStyleSheet(style)
+                layout.addWidget(label, i+1, 0)
+
+                label = QLabel(stringManipu.format_float_to_scale(material.Hf[i], 2))
+                label.setStyleSheet(style+textEditStyle)
+                layout.addWidget(label, i+1, 1)
+
+                label = QLabel(stringManipu.format_float_to_scale(self.plot_item.x_peaks[i], 2))
+                label.setStyleSheet(style+textEditStyle)
+                layout.addWidget(label, i+1, 2)
+                if i+1 == self.plot_item.x_peaks.size:
+                    button = QPushButton("Show")
+                    button.clicked.connect(self.show_theoretical_peaks)
+                    layout.addWidget(button, i+2, 1)
+
+                    button = QPushButton("Show")
+                    button.clicked.connect(self.show_experimental_peaks)
+                    layout.addWidget(button, i+2, 2)
+        except Exception as e:
+            info.showCriticalErrorBox(sys.exc_info())
+            return
+            
 
     def show_experimental_peaks(self):
 

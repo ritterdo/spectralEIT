@@ -74,6 +74,8 @@ class PlotTab(QWidget, DefaultClass):
 
     def get_peaks(self):
 
+        self.logger.info("Get peaks")
+
         ratio = self.x.size/(np.max(self.x) - np.min(self.x))
         diff =  np.abs(np.max(self.y) - np.min(self.y))
 
@@ -84,6 +86,8 @@ class PlotTab(QWidget, DefaultClass):
 
 
     def set_peaks(self):
+
+        self.logger.info("Set peaks")
 
         ## Select material
         material = mat(self.comboBox_material.currentText())
@@ -136,6 +140,8 @@ class PlotTab(QWidget, DefaultClass):
 
     def show_experimental_peaks(self):
 
+        self.logger.info("Show experimental peaks")
+
         if not any(self.plot_item.x_peaks):
             self.get_peaks()
         
@@ -147,6 +153,8 @@ class PlotTab(QWidget, DefaultClass):
 
     def show_theoretical_peaks(self):
 
+        self.logger.info("Show theoretical peaks")
+
         ## Select material
         material = mat(self.comboBox_material.currentText())
 
@@ -157,6 +165,8 @@ class PlotTab(QWidget, DefaultClass):
 
 
     def get_fwhm(self):
+
+        self.logger.info("Get FWHM")
 
         ## Select material
         material = mat(self.comboBox_material.currentText())
@@ -195,6 +205,11 @@ class PlotTab(QWidget, DefaultClass):
         distance = 0.3*x_area.size/(np.max(x_area)-np.min(x_area))*np.abs(material.Hf[1]-material.Hf[0])
 
         peaks, widths, left, right = FWHM(x_area, y_area, height=float(self.textEdit_cutoff_height_fwhm.toPlainText())*np.max(y_area), inverted=self.checkBox_inverted_peak.isChecked(), distance=distance)
+
+        self.logger.info("Peaks: "+str(x_area[peaks]))
+        self.logger.info("Widths: "+str(widths))
+        self.logger.info("Left: "+str(x_area[left]))
+        self.logger.info("Right: "+str(x_area[right]))
 
         self.textEdit_x.setText(stringManipu.format_float_to_scale(x_area[peaks], 2))
         self.textEdit_y.setText(stringManipu.format_float_to_scale(y_area[peaks], 2))

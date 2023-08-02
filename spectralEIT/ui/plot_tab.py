@@ -26,7 +26,6 @@ class PlotTab(QWidget, DefaultClass):
         self.load_ui("graphTab.ui")
 
         self.pushButton_get_fwhm.clicked.connect(self.get_fwhm)
-        # self.pushButton_show_experimental_peaks.connect(self.show_experimental_peaks)
 
         self.textEdit_cutoff_height_fwhm.setText("0.02")
         self.textEdit_cutoff_height_properties.setText("0.2")
@@ -117,6 +116,8 @@ class PlotTab(QWidget, DefaultClass):
 
         for i in range(self.plot_item.x_peaks.size):
 
+            self.logger.info("Add peak %d to plot properties", i+1)
+
             label = QLabel("x"+str(i+1))
             label.setStyleSheet(style)
             layout.addWidget(label, i+1, 0)
@@ -175,6 +176,7 @@ class PlotTab(QWidget, DefaultClass):
         def FWHM(x, y, height=None, inverted=False, distance=None):
 
             if inverted:
+                self.logger.info("Invert y in FWHM")
                 y = -1*(y-1)
 
             peaks,_ = sig.find_peaks(y, height=height, distance=distance)
@@ -182,9 +184,6 @@ class PlotTab(QWidget, DefaultClass):
 
             length = len(fwhm)
             widths = np.zeros(length)
-
-            # if inverted:
-            #     y = -1*(y-1)
 
             for i in range(length):
                 widths[i] = np.abs(x[int(right[i])] - x[int(left[i])])
@@ -204,13 +203,22 @@ class PlotTab(QWidget, DefaultClass):
 
         distance = 0.3*x_area.size/(np.max(x_area)-np.min(x_area))*np.abs(material.Hf[1]-material.Hf[0])
 
+        self.logger.info("Distance: %f", distance)
+
         peaks, widths, left, right = FWHM(x_area, y_area, height=float(self.textEdit_cutoff_height_fwhm.toPlainText())*np.max(y_area), inverted=self.checkBox_inverted_peak.isChecked(), distance=distance)
 
-        self.logger.info("Peaks: "+str(x_area[peaks]))
-        self.logger.info("Widths: "+str(widths))
-        self.logger.info("Left: "+str(x_area[left]))
-        self.logger.info("Right: "+str(x_area[right]))
+        self.logger.info("Peaks in indices: %s", str(peaks))
+        self.logger.info("Peaks in frequency: %s", str(x_area[peaks]))
+        self.logger.info("Widths: %s", str(widths))
+        self.logger.info("Left in indices: %s", str(left))
+        self.logger.info("Left in frequency (rounded): %s", str(x_area[left.round().astype(int)]))
+        self.logger.info("Right in indices: %s", str(right))
+        self.logger.info("Right in frequency (rounded): %s", str(x_area[right.round().astype(int)]))
 
+        self.logger.info("Write to textEdit in FWHM")
         self.textEdit_x.setText(stringManipu.format_float_to_scale(x_area[peaks], 2))
         self.textEdit_y.setText(stringManipu.format_float_to_scale(y_area[peaks], 2))
         self.textEdit_widths.setText(stringManipu.format_float_to_scale(widths, 2))
+
+        self.logger.info("Add FWHM to plot")
+        self.window().tab_graph_widget.currentWidget().add_fwhm_line(x_area[left.round().astype(int)], x_area[right.round().astype(int)], y_area[right.round().astype(int)])

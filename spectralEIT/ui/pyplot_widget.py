@@ -9,7 +9,9 @@ from PyQt5.QtGui import QFont, QColor
 from spectralEIT.bin.default_config import DefaultClass, COLOUR_MAP
 
 import spectralEIT.bin.string_manipulation as stringManipu
+import spectralEIT.bin.info_windows as info
 
+import logging
 
 class AxisItem(pg.AxisItem):
 
@@ -31,10 +33,14 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
 
     updatePlotItem = pyqtSignal(object)
 
-    def __init__(self, *args, **kwargs):#name: str = None,
+    def __init__(self, *args, **kwargs):
+
+        self.logger = logging.getLogger(__name__)
 
         if "name" in kwargs:
             self.name = kwargs["name"]
+        
+        self.logger.info("Initiate PyPlotWidget with name: %s" % self.name)
 
         pg.PlotWidget.__init__(self,
             *args,
@@ -74,6 +80,7 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
         self.lines_peaks_count = 0
         self.lines_experimental_count = 0
         self.lines_theoretical_count = 0
+        self.fwhm_count = 0
 
         self.selection = None
         self.tab = None
@@ -106,21 +113,53 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
 
 
     def remove_peak_lines(self, name="peaks"):
+        self.logger.info("Remove peak lines for %s", name)
         for i in range(getattr(self, "lines_{}_count".format(name))):
+            self.logger.info("Remove peak line %d", i)
             if hasattr(self,  "lines_{}_".format(name) + str(i)):
                 self.removeItem(getattr(self, "lines_{}_".format(name) + str(i)))
+        setattr(self, "lines_{}_count".format(name), 0)
 
 
     def remove_lines(self):
+        self.logger.info("Remove all lines")
         self.remove_peak_lines("experimental")
         self.remove_peak_lines("theoretical")
         self.remove_selection_lines()
+        self.remove_fwhm_line()
 
 
     def add_peak_line(self, x, number=None, name="peaks", color="green"):
+        self.logger.info("Add peak line for %s", name)
         setattr(self, "lines_{}_count".format(name), getattr(self, "lines_{}_count".format(name))+1)
-        setattr(self, "lines_{}_{}".format(name, number), pg.InfiniteLine(x, pen=pg.mkPen(QColor(color), style=Qt.DashLine)))
+        setattr(self, "lines_{}_{}".format(name, number), pg.InfiniteLine(x, pen=pg.mkPen(QColor(color), width=2, style=Qt.DashLine)))
         self.addItem(getattr(self, "lines_{}_{}".format(name, number)))
+    
+
+    def add_fwhm_line(self, x_left, x_right, y):
+        self.logger.info("Add fwhm line")
+        try:
+            if len(x_left) != len(x_right):
+                raise ValueError("x_left and x_right must have the same length")
+            for i in range(len(x_left)):
+                self.logger.info("Add fwhm line %d",i)
+                setattr(self, "fwhm_count", getattr(self, "fwhm_count")+1)
+                setattr(self, "fwhm_{}".format(i), pg.PlotDataItem([x_left[i], x_right[i]], [y[i], y[i]], pen=pg.mkPen(QColor("cyan"), width=2, style=Qt.DashLine)))
+                self.addItem(getattr(self, "fwhm_{}".format(i)))
+        except ValueError as e:
+            info.showCritical(e)
+            return
+        except AttributeError as e:
+            info.showCritical(e)
+            return
+
+
+    def remove_fwhm_line(self):
+        self.logger.info("Remove all fwhm lines")
+        for i in range(getattr(self, "fwhm_count")):
+            self.logger.info("Remove fwhm line %d",i)
+            self.removeItem(getattr(self, "fwhm_{}".format(i)))
+        setattr(self, "fwhm_count", 0)
 
 
     def already_plotted(self, name):

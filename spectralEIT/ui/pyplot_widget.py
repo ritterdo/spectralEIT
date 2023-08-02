@@ -6,7 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal, QRect
 from PyQt5.QtGui import QFont, QColor
 
-from spectralEIT.bin.default_config import DefaultClass, COLOUR_MAP
+from spectralEIT.bin.default_config import DefaultClass, COLOUR_MAP, NUMBER_TYPES, LIST_TYPES
 
 import spectralEIT.bin.string_manipulation as stringManipu
 import spectralEIT.bin.info_windows as info
@@ -137,28 +137,40 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
     
 
     def add_fwhm_line(self, x_left, x_right, y):
-        self.logger.info("Add fwhm line")
+        self.logger.info("Start adding fwhm line")
+        if not (type(x_left) == type(x_right) == type(y)):
+            info.showCriticalErrorBox("x_left, x_right and y must be of the same type")
+            self.logger.info("Types of x_left, x_right and y are: %s, %s, %s", type(x_left), type(x_right), type(y))
+            return
         try:
-            if len(x_left) != len(x_right):
-                raise ValueError("x_left and x_right must have the same length")
-            for i in range(len(x_left)):
-                self.logger.info("Add fwhm line %d",i)
+            if type(x_left) in LIST_TYPES:
+                if len(x_left) != len(x_right):
+                    raise ValueError("x_left and x_right must have the same length")
+                for i in range(len(x_left)):
+                    self.logger.info("Add fwhm line %d",self.fwhm_count+1)
+                    setattr(self, "fwhm_count", getattr(self, "fwhm_count")+1)
+                    setattr(self, "fwhm_{}".format(self.fwhm_count), pg.PlotDataItem([x_left[i], x_right[i]], [y[i], y[i]], pen=pg.mkPen(QColor("cyan"), width=2, style=Qt.DashLine)))
+                    self.addItem(getattr(self, "fwhm_{}".format(self.fwhm_count)))
+            elif type(x_left) in NUMBER_TYPES:
+                self.logger.info("Add fwhm line %d", self.fwhm_count+1)
                 setattr(self, "fwhm_count", getattr(self, "fwhm_count")+1)
-                setattr(self, "fwhm_{}".format(i), pg.PlotDataItem([x_left[i], x_right[i]], [y[i], y[i]], pen=pg.mkPen(QColor("cyan"), width=2, style=Qt.DashLine)))
-                self.addItem(getattr(self, "fwhm_{}".format(i)))
+                setattr(self, "fwhm_{}".format(self.fwhm_count), pg.PlotDataItem([x_left, x_right], [y, y], pen=pg.mkPen(QColor("cyan"), width=2, style=Qt.DashLine)))
+                self.addItem(getattr(self, "fwhm_{}".format(self.fwhm_count)))
+            else:
+                raise AttributeError("x_left, x_right and y must be of type list or number")
         except ValueError as e:
-            info.showCritical(e)
+            info.showCriticalErrorBox(e)
             return
         except AttributeError as e:
-            info.showCritical(e)
+            info.showCriticalErrorBox(e)
             return
 
 
     def remove_fwhm_line(self):
         self.logger.info("Remove all fwhm lines")
         for i in range(getattr(self, "fwhm_count")):
-            self.logger.info("Remove fwhm line %d",i)
-            self.removeItem(getattr(self, "fwhm_{}".format(i)))
+            self.logger.info("Remove fwhm line %d",i+1)
+            self.removeItem(getattr(self, "fwhm_{}".format(i+1)))
         setattr(self, "fwhm_count", 0)
 
 

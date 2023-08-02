@@ -29,6 +29,7 @@ class PlotTab(QWidget, DefaultClass):
 
         self.textEdit_cutoff_height_fwhm.setText("0.02")
         self.textEdit_cutoff_height_properties.setText("0.2")
+        self.textEdit_relative_distance.setText("0.3")
 
         def select_points(name):
             self.window().tab_graph_widget.currentWidget().enable_point_selection = True
@@ -205,7 +206,7 @@ class PlotTab(QWidget, DefaultClass):
             x_area = self.x[(area[0]<self.x)&(self.x<area[1])]
             y_area = self.y[(area[0]<self.x)&(self.x<area[1])]
 
-        distance = 0.3*x_area.size/(np.max(x_area)-np.min(x_area))*np.abs(material.Hf[1]-material.Hf[0])
+        distance = float(self.textEdit_relative_distance.toPlainText())*x_area.size/(np.max(x_area)-np.min(x_area))*np.abs(material.Hf[1]-material.Hf[0])
 
         self.logger.info("Distance: %f", distance)
 

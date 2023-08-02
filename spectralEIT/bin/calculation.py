@@ -177,10 +177,6 @@ class LightPropagation():
             TFunction = 1
             for i,zStep in enumerate(self.z):
                 self.logger.info("Current zStep is %f", zStep)
-                if self.cancelBool == True:
-                    self.logger.info("Calculation cancelled")
-                    self.reset()
-                    return 0
                 if progress_callback != None:
                     progress_callback.emit(self.text(), int(100*zStep/self.par.cellLength))
                 # get the rabi frequency
@@ -346,6 +342,12 @@ class LightPropagation():
 
             # Loop over all the velocities
             for v in np.arange(-a,a-dv,dv):
+
+                # Check if the calculation is cancelled
+                if self.cancelBool == True:
+                    self.logger.info("Calculation cancelled")
+                    self.reset()
+                    raise InterruptedError("Calculation cancelled")
 
                 # calculation of the gauss and lorentz profile
                 gauss = (2*np.pi*U**2)**-0.5 * np.exp(-0.5*(v**2)/(U**2))

@@ -8,6 +8,7 @@ class WorkerSignals(QObject):
     result = pyqtSignal(str)
     progress = pyqtSignal(str,int)
     error = pyqtSignal(tuple,str)
+    cancelled = pyqtSignal(str)
 
 class Worker(QRunnable):
 
@@ -33,6 +34,8 @@ class Worker(QRunnable):
         # Retrieve args/kwargs here; and fire processing using them
         try:
             self.fn(*self.args, **self.kwargs)
+        except InterruptedError:
+            self.signals.cancelled.emit(self.kwargs["objectName"])
         except Exception:
             self.signals.error.emit(exc_info(), self.kwargs["objectName"])
         else:

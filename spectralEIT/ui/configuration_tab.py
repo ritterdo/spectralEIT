@@ -29,7 +29,8 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.logger.info("Initiate ConfigurationTab")
 
         self.load_ui("configurationTab.ui")
-
+        
+        self.lastPressedButton = "None"
 
         self.pushButton_default_parameters.clicked.connect(lambda: self.load_parameters(every="all"))
         self.pushButton_startCalculation.clicked.connect(self.start_calculation)
@@ -306,12 +307,26 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.window().calc_list.currentItem().set_parameters(self.get_parameters())
 
 
-    def cancel_calculation(self, name):
-        current = self.window().calc_list.get_item(name)
-        if "fit_{}".format(current.text()) in self.window().threadIsRunning.keys():
-            return
+    def cancel_calculation(self):
+        current = self.window().calc_list.currentItem()
         if current.text() in self.window().threadIsRunning.keys():
             current.cancelBool = True
+
+
+    def close_calculation(self, name=None, type=None):#
+        if not name:
+            name = self.window().calc_list.currentItem().text()
+        if name in self.window().threadIsRunning.keys():
+            try:
+                self.window().statusbar.removeWidget(getattr(self, "progressBar_{}".format(name)))
+                delattr(self, "progressBar_{}".format(name))
+                self.logger.info("%s: Progressbar deleted for %s", type, name)
+            except:
+                self.logger.info("%s: Progressbar not found for %s", type, name)
+            self.window().threadIsRunning.pop(name)
+            self.logger.info("%s: Thread deleted: %s", type, name)
+            self.logger.info("%s: Total threads: %s", type, self.window().threadIsRunning)
+        
 
 
     ############################
@@ -321,6 +336,7 @@ class ConfigurationTab(QWidget, DefaultClass):
     ############################
     def start_calculation(self):
         self.logger.info("Starting Calculation")
+        self.lastPressedButton="CALCULATION"
         if self.window().calc_list.count() == 0:
             self.window().calc_list.add_item(
                     _parent = self.window().calc_list,
@@ -335,14 +351,20 @@ class ConfigurationTab(QWidget, DefaultClass):
         except Exception as e:
             info.showCriticalErrorBox(sys.exc_info())
             return
-        self.window().threadIsRunning[name] = True
 
-        self.window().statusbarMessage.setText("Calculating...")
+        try:
+            self.window().threadIsRunning[name] = True
+            self.logger.info("ThreadIsRunning: %s", self.window().threadIsRunning)
+            self.window().statusbarMessage.setText("Calculating...")
 
-        setattr(self, "progressBar_{}".format(name), QProgressBar(self.window()))
-        tmp = getattr(self, "progressBar_{}".format(name), None)
-        tmp.setFormat("{name} - %p%".format(name=name))
-        self.window().statusbar.addWidget(tmp)
+            setattr(self, "progressBar_{}".format(name), QProgressBar(self.window()))
+            tmp = getattr(self, "progressBar_{}".format(name), None)
+            tmp.setFormat("{name} - %p%".format(name=name))
+            self.window().statusbar.addWidget(tmp)
+            self.logger.info("CALCULATION: Progressbar %s created", name)   
+        except Exception as e:
+            self.calculation_error_function(sys.exc_info(),name)
+            return           
 
         try:
             self.logger.info("CALCULATION: Setting up working thread")
@@ -353,9 +375,9 @@ class ConfigurationTab(QWidget, DefaultClass):
             worker.signals.finished.connect(self.calculation_finished_function)
             worker.signals.progress.connect(self.calculation_progress_function)
             worker.signals.error.connect(self.calculation_error_function)
+            worker.signals.cancelled.connect(lambda: self.close_calculation(type="CALCULATION"))
         except Exception as e:
-            self.logger.exception("CALCULATION: An error occured with the worker: %s", str(e))
-            raise e
+            self.calculation_error_function(sys.exc_info(),name)
             return
 
         self.logger.info("CALCULATION: Starting worker %s", name)
@@ -373,13 +395,13 @@ class ConfigurationTab(QWidget, DefaultClass):
         item = self.window().calc_list.get_item(name)
         self.window().calc_list.itemChanged.emit(item)
 
-        # self.window().calc_list.check_plotable(item)
-        # getattr(self, "progressBarSet{}".format(csCalc.setNumber)).reset()
-
         self.window().statusbar.removeWidget(getattr(self, "progressBar_{}".format(name)))
         delattr(self, "progressBar_{}".format(name))
+        self.logger.info("CALCULATION: Progressbar %s deleted", name)
 
         self.window().threadIsRunning.pop(name)
+        self.logger.info("CALCULATION: Thread deleted: %s", name)
+        self.logger.info("CALCULATION: Total threads: %s", self.window().threadIsRunning)
         info.showInfoBox("CALCULATION: Finished of parameter set {}!".format(name))
 
 
@@ -391,14 +413,18 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def calculation_progress_function(self, name, progress):
+        self.logger.info("CALCULATION: Progressbar %s set to %s", name, progress)
         progressBar = getattr(self, "progressBar_{}".format(name), None)
         progressBar.setValue(progress)
 
 
     def calculation_error_function(self, exception, name):
-        self.window().statusbar.removeWidget(getattr(self, "progressBar_{}".format(name)))
-        delattr(self, "progressBar_{}".format(name))
-        self.window().threadIsRunning.pop(name)
+        self.close_calculation(type="CALCULATION", name=name)
+        # self.window().statusbar.removeWidget(getattr(self, "progressBar_{}".format(name)))
+        # delattr(self, "progressBar_{}".format(name))
+        # self.window().threadIsRunning.pop(name)
+        # self.logger.info("CALCULATION: Thread deleted: %s", name)
+        # self.logger.info("CALCULATION: Total threads: %s", self.window().threadIsRunning)
         info.showCriticalErrorBox(exception)
 
 
@@ -411,10 +437,14 @@ class ConfigurationTab(QWidget, DefaultClass):
 
         self.logger.info("Start fitting")
 
+        self.lastPressedButton="FITTING"
+
         try:
             calc_name = self.window().calc_list.currentItem().text()
+            self.logger.info("FITTING: Calculation name: %s", calc_name)
             plotable_item = self.window().plotable_list.currentItem()
             measurement = getattr(plotable_item.parent_item, plotable_item.text())
+            self.logger.info("FITTING: Measurement: %s", plotable_item.text())
 
             # print(plotable_item.text())
 
@@ -433,7 +463,8 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.logger.info("FITTING: Fitting of measurement %s with the calculation %s", plotable_item.text(), calc_name)
 
         try:
-            if "fit_{}".format(calc_name) in self.window().threadIsRunning.keys():
+            # if "fit_{}".format(calc_name) in self.window().threadIsRunning.keys():
+            if calc_name in self.window().threadIsRunning.keys():
                 raise ThreadError("FITTING: Calculation already running")
         except Exception as e:
             info.showCriticalErrorBox(sys.exc_info())
@@ -446,6 +477,7 @@ class ConfigurationTab(QWidget, DefaultClass):
             worker.signals.finished.connect(self.fitting_finished)
             worker.signals.progress.connect(self.fitting_progress)
             worker.signals.error.connect(self.fitting_error)
+            worker.signals.cancelled.connect(lambda: self.close_calculation(type="FITTING"))
         except Exception as e:
             self.fitting_error(sys.exec_info(), calc_name)
             return
@@ -475,7 +507,8 @@ class ConfigurationTab(QWidget, DefaultClass):
         else:
             raise ValueError("FITTING: checkedParams in fitting function where not set! Please check the fit parameters.")
 
-        self.window().threadIsRunning["fit_{}".format(objectName)] = True
+        # self.window().threadIsRunning["fit_{}".format(objectName)] = True
+        self.window().threadIsRunning[objectName] = True
         self.window().statusbarMessage.setText("Calculating...")
 
         # print("fitting_start 2")
@@ -521,8 +554,8 @@ class ConfigurationTab(QWidget, DefaultClass):
         item = self.window().calc_list.get_item(name)
         self.window().calc_list.itemChanged.emit(item)
         self.load_parameters(par_dict=item.parameter_dict)
-        self.window().threadIsRunning.pop("fit_{}".format(name))
-        info.showInfoBox("FITTING: Calculation finished of parameter set {}!".format("fit_{}".format(name)))
+        self.window().threadIsRunning.pop(name)
+        info.showInfoBox("FITTING: Calculation finished of parameter set {}!".format(name))
 
 
     def fitting_finished(self):
@@ -537,7 +570,7 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def fitting_error(self, exception, name):
-        self.cancel_calculation(name)
+        self.close_calculation(type="FITTING", name=name)
         # self.window().statusbarMessage.setText("Ready")
         # self.window().threadIsRunning.pop("fit_{}".format(name))
         info.showCriticalErrorBox(exception)

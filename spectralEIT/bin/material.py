@@ -16,7 +16,7 @@ class Material():
 
     def __init__(self, material: str=""):
 
-        self.logger = logging.getLogger(material)
+        self.logger = logging.getLogger(__name__)
         self.logger.info("Initiate material %s", material)
 
         if material == None or material == "":
@@ -24,6 +24,8 @@ class Material():
 
         if material + ".yaml" not in self.get_material_list():
            raise MaterialError("Material not found in material/data")
+        
+        self.name = material
 
         data_dict = self.get_dict(material)
 

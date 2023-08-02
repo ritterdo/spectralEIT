@@ -28,7 +28,8 @@ class PlotTab(QWidget, DefaultClass):
         self.pushButton_get_fwhm.clicked.connect(self.get_fwhm)
         # self.pushButton_show_experimental_peaks.connect(self.show_experimental_peaks)
 
-        self.textEdit_cutoff_height.setText("0.02")
+        self.textEdit_cutoff_height_fwhm.setText("0.02")
+        self.textEdit_cutoff_height_properties.setText("0.2")
 
         def select_points(name):
             self.window().tab_graph_widget.currentWidget().enable_point_selection = True
@@ -76,7 +77,7 @@ class PlotTab(QWidget, DefaultClass):
         ratio = self.x.size/(np.max(self.x) - np.min(self.x))
         diff =  np.abs(np.max(self.y) - np.min(self.y))
 
-        peaks, _ = sig.find_peaks(-(self.y-1), height=0.01*diff, distance=int(ratio*1e9))
+        peaks, _ = sig.find_peaks(-(self.y-1), height=float(self.textEdit_cutoff_height_properties.toPlainText())*diff, distance=int(ratio*1e9))
 
         self.plot_item.x_peaks = self.x[peaks]
         self.plot_item.y_peaks = self.y[peaks]
@@ -141,7 +142,7 @@ class PlotTab(QWidget, DefaultClass):
         self.window().tab_graph_widget.currentWidget().remove_peak_lines("experimental")
 
         for i, x in enumerate(self.plot_item.x_peaks):
-            self.window().tab_graph_widget.currentWidget().add_peak_line(x, i, "experimental")
+            self.window().tab_graph_widget.currentWidget().add_peak_line(x, number=i, name="experimental", color="red")
 
 
     def show_theoretical_peaks(self):
@@ -152,7 +153,7 @@ class PlotTab(QWidget, DefaultClass):
         self.window().tab_graph_widget.currentWidget().remove_peak_lines("theoretical")
 
         for i, x in enumerate(material.Hf):
-            self.window().tab_graph_widget.currentWidget().add_peak_line(x, i, "theoretical")
+            self.window().tab_graph_widget.currentWidget().add_peak_line(x, number=i, name="theoretical", color="green")
 
 
     def get_fwhm(self):
@@ -191,11 +192,9 @@ class PlotTab(QWidget, DefaultClass):
             x_area = self.x[(area[0]<self.x)&(self.x<area[1])]
             y_area = self.y[(area[0]<self.x)&(self.x<area[1])]
 
-        cutoff_height = float(self.textEdit_cutoff_height.toPlainText())
-
         distance = 0.3*x_area.size/(np.max(x_area)-np.min(x_area))*np.abs(material.Hf[1]-material.Hf[0])
 
-        peaks, widths, left, right = FWHM(x_area, y_area, height=cutoff_height*np.max(y_area), inverted=self.checkBox_inverted_peak.isChecked(), distance=distance)
+        peaks, widths, left, right = FWHM(x_area, y_area, height=float(self.textEdit_cutoff_height_fwhm.toPlainText())*np.max(y_area), inverted=self.checkBox_inverted_peak.isChecked(), distance=distance)
 
         self.textEdit_x.setText(stringManipu.format_float_to_scale(x_area[peaks], 2))
         self.textEdit_y.setText(stringManipu.format_float_to_scale(y_area[peaks], 2))

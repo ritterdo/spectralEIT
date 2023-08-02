@@ -117,9 +117,9 @@ class PyPlotWidget(pg.PlotWidget, DefaultClass):
         self.remove_selection_lines()
 
 
-    def add_peak_line(self, x, number=None, name="peaks"):
+    def add_peak_line(self, x, number=None, name="peaks", color="green"):
         setattr(self, "lines_{}_count".format(name), getattr(self, "lines_{}_count".format(name))+1)
-        setattr(self, "lines_{}_{}".format(name, number), pg.InfiniteLine(x, pen=pg.mkPen(QColor(0,0,0), style=Qt.DashLine)))
+        setattr(self, "lines_{}_{}".format(name, number), pg.InfiniteLine(x, pen=pg.mkPen(QColor(color), style=Qt.DashLine)))
         self.addItem(getattr(self, "lines_{}_{}".format(name, number)))
 
 

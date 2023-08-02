@@ -276,7 +276,7 @@
     <rect>
      <x>20</x>
      <y>290</y>
-     <width>101</width>
+     <width>131</width>
      <height>16</height>
     </rect>
    </property>
@@ -351,19 +351,6 @@
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>60</y>
-     <width>51</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </widget>
   <widget class="QFrame" name="frame_3">
    <property name="geometry">
     <rect>
@@ -381,7 +368,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="2">
-     <widget class="QTextEdit" name="textEdit_cutoff_height">
+     <widget class="QTextEdit" name="textEdit_cutoff_height_fwhm">
       <property name="maximumSize">
        <size>
         <width>150</width>
@@ -398,6 +385,77 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>60</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Settings FWHM</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>290</y>
+     <width>131</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Settings Properties</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame_4">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>310</y>
+     <width>261</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>13</y>
+      <width>88</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cut Off Height</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_cutoff_height_properties">
+    <property name="geometry">
+     <rect>
+      <x>105</x>
+      <y>13</y>
+      <width>145</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

@@ -10,7 +10,7 @@ def get_logger():
     logger = logging.getLogger() 
     logger.setLevel(logging.INFO)  
 
-    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(module)s.%(funcName)s - %(name)s - %(message)s")
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(module)s.%(funcName)s - %(message)s")
     file_info_handler = logging.FileHandler("logs/" + now.strftime("%Y-%m-%d_%H:%M") + ".log")
     file_info_handler.setLevel(logging.INFO)  
     file_info_handler.setFormatter(formatter)

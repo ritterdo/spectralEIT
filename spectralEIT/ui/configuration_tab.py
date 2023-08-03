@@ -368,8 +368,6 @@ class ConfigurationTab(QWidget, DefaultClass):
 
         try:
             self.logger.info("CALCULATION: Setting up working thread")
-            # setattr(self, "worker_{}".format(name), workers.Worker(self.calculation_function, objectName = name))
-            # worker = getattr(self, "worker_{}".format(name))
             worker = workers.Worker(self.calculation_function, objectName = name)
             worker.signals.result.connect(self.calculation_result_function)
             worker.signals.finished.connect(self.calculation_finished_function)
@@ -419,13 +417,8 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def calculation_error_function(self, exception, name):
-        self.close_calculation(type="CALCULATION", name=name)
-        # self.window().statusbar.removeWidget(getattr(self, "progressBar_{}".format(name)))
-        # delattr(self, "progressBar_{}".format(name))
-        # self.window().threadIsRunning.pop(name)
-        # self.logger.info("CALCULATION: Thread deleted: %s", name)
-        # self.logger.info("CALCULATION: Total threads: %s", self.window().threadIsRunning)
         info.showCriticalErrorBox(exception)
+        self.close_calculation(type="CALCULATION", name=name)
 
 
     ############################
@@ -446,8 +439,6 @@ class ConfigurationTab(QWidget, DefaultClass):
             measurement = getattr(plotable_item.parent_item, plotable_item.text())
             self.logger.info("FITTING: Measurement: %s", plotable_item.text())
 
-            # print(plotable_item.text())
-
             freq, _ = measurement.getData()
 
             self.textEdit_par_freqStart.setText(str(np.min(freq)))
@@ -463,7 +454,6 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.logger.info("FITTING: Fitting of measurement %s with the calculation %s", plotable_item.text(), calc_name)
 
         try:
-            # if "fit_{}".format(calc_name) in self.window().threadIsRunning.keys():
             if calc_name in self.window().threadIsRunning.keys():
                 raise ThreadError("FITTING: Calculation already running")
         except Exception as e:
@@ -491,28 +481,19 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def fitting_start(self, measurement, objectName, progress_callback):
-        # print("fitting_start 1")
+
         sim = self.window().calc_list.get_item(objectName)
-        # meas = getattr(plotable_item.parent_item, plotable_item.text())
         x_data, y_data = measurement.getData()
-
-        # self.textEdit_par_freqStart.setText(str(np.min(x_data)))
-        # self.textEdit_par_freqStop.setText(str(np.max(x_data)))
-        # self.textEdit_par_freqSteps.setText(str(len(x_data)))
-
         checkedParams = self.check_check_boxes()
-        # print(checkedParams)
+        
         if checkedParams:
             param = self.get_parameters(par_list=checkedParams)
         else:
             raise ValueError("FITTING: checkedParams in fitting function where not set! Please check the fit parameters.")
 
-        # self.window().threadIsRunning["fit_{}".format(objectName)] = True
         self.window().threadIsRunning[objectName] = True
         self.window().statusbarMessage.setText("Calculating...")
 
-        # print("fitting_start 2")
-        # print(param)
         fitParams, fitCov = curve_fit(
                 lambda x, *fitpara: self.fitting_function_IoutW(x, {k:v for k,v in zip(param.keys(),fitpara)}),
                 x_data,
@@ -522,16 +503,11 @@ class ConfigurationTab(QWidget, DefaultClass):
             )
         fitParams = {k:v for k,v in zip(param.keys(), fitParams)}
 
-        # print(fitParams)
-        # print("fitting_start 3")
-
         parameter_dict = self.get_parameters()
 
         for keys in fitParams.keys():
             parameter_dict[keys] = fitParams[keys]
-        # self.all_parameter_dict[self.comboBox_calculationSet.currentIndex()] = parameter_dcitionary
-
-        # calc.f = x_data
+        
         sim.set_parameters(parameter_dict)
         sim.calculate()
         sim.fitCov = {k:v for k,v in zip(param.keys(), fitCov)}
@@ -539,8 +515,6 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def fitting_function_IoutW(self, freq, par_dict):
-        # print(par_dict)
-        # print("fitting...")
         parameter_dictionary = self.get_parameters()
         for keys in par_dict.keys():
             parameter_dictionary[keys] = par_dict[keys]
@@ -570,7 +544,5 @@ class ConfigurationTab(QWidget, DefaultClass):
 
 
     def fitting_error(self, exception, name):
-        self.close_calculation(type="FITTING", name=name)
-        # self.window().statusbarMessage.setText("Ready")
-        # self.window().threadIsRunning.pop("fit_{}".format(name))
         info.showCriticalErrorBox(exception)
+        self.close_calculation(type="FITTING", name=name)

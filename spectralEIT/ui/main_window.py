@@ -8,7 +8,6 @@ import spectralEIT.ui.rabi_frequency as rabiWin
 
 import spectralEIT.bin.info_windows as info
 import spectralEIT.bin.input_dialog as input
-import spectralEIT.bin.parameters as par
 
 from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
 from spectralEIT.bin.default_config import DefaultClass
@@ -152,7 +151,6 @@ class MainWindow(QMainWindow, DefaultClass):
         self.plotted_list.clear()
         self.logger.info("Plotted list changed to: " + "".join(item.name() for item in list))
         for item in list:
-            print(item.name())
             self.plotted_list.add_item(item)
 
 

@@ -23,12 +23,15 @@ import platform
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 def main():
-    
-    logger = log.get_logger()
-    logger.info("Application Starts")
 
     # QApplication.setGraphicsSystem("raster")
     app = QApplication(sys.argv)
+
+    check_logs_dir()
+    check_logs_dir_size()
+    
+    logger = log.get_logger()
+    logger.info("Application Starts")
 
     f = QFile("bin/style_Dark.qss")
     if not f.exists():
@@ -88,6 +91,4 @@ def check_logs_dir_size():
         
 
 if __name__ == "__main__":
-    check_logs_dir()
-    check_logs_dir_size()
     main()

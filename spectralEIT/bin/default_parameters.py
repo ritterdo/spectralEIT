@@ -6,7 +6,7 @@ import re
 
 default_params = [
             "width0", "focalLength", "posLC", "prop", "cellLength", "zsteps", "lightShape",
-            "propType", "dt", "rabiFrequency", "pulseFreq", "lcLength", "rabiSteps", "lossdB",
+            "propType", "dt", "rabiFrequency", "pulseFreq", "lcLength", "lossdB",
             "EITDetune", "f0det", "T", "gammad", "profile", "gaussSteps", "transition", "type",
             "gamma_coll", "freqStart", "freqStop", "freqSteps"
         ]

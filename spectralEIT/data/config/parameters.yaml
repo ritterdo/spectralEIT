@@ -13,7 +13,6 @@ dt: 20e-9
 rabiFrequency: 200e6
 pulseFreq: 4514035706.25
 lcLength: 4.5e-3
-rabiSteps: 1e-5
 lossdB: -1e3
 EITDetune: 0
 f0det: 0

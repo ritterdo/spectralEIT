@@ -70,7 +70,6 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.label_par_propType.setToolTip("Focused:\tunfocused\t- Light is collimated\n\tfocused\t\t- Light is focused on the light cage beginning either with or without a light cage")
         self.label_par_dt.setToolTip("Duration of the Light Pulse [s]")
         self.label_par_pulseFreq.setToolTip("Number of the Pulse Frequency in respect of the Transitions if the Light Pulse differs from the desired Transition")
-        self.label_par_rabiSteps.setToolTip("Segmentation of the Light Cage for the Rabi Frequency calculation [m]")
         self.label_par_T.setToolTip("Temperature of the Cesium Cell [˚C]")
         self.label_par_zsteps.setToolTip("Number of Segments of the Light Cage for the Propagation Caluclation")
         self.label_par_profile.setToolTip("Chi Profile:\tlorentz\t- Lorentz profile as chi shape in frequency space\n\t\tvoigt\t- Voigt profile as chi shape in frequency space, includes Doppler broadening of the lorentz profile")
@@ -121,11 +120,9 @@ class ConfigurationTab(QWidget, DefaultClass):
     def prop_type_option(self):
         if self.comboBox_propType.currentText() == "focused":
             self.textEdit_par_focalLength.setEnabled(True)
-            self.textEdit_par_rabiSteps.setEnabled(True)
             self.textEdit_par_zsteps.setEnabled(True)
         elif self.comboBox_propType.currentText() == "unfocused":
             self.textEdit_par_focalLength.setEnabled(False)
-            self.textEdit_par_rabiSteps.setEnabled(False)
             self.textEdit_par_zsteps.setEnabled(False)
         else:
             info.showInfoBox("Is the light focused was not set!")

@@ -65,12 +65,21 @@ def check_logs_dir():
 
 def check_logs_dir_size():
     total_size = 0
+    total_files = 0
     for dirpath, dirnames, filenames in os.walk("logs"):
         for f in filenames:
+            total_files += 1
             fp = os.path.join(dirpath, f)
             total_size += os.path.getsize(fp)
     if total_size > 100000000:
         result = showQuestionBox("Warning", "Log folder size is over 100MB. Do you want to delete all old logs?.")
+        if result == QMessageBox.Yes:
+            for dirpath, dirnames, filenames in os.walk("logs"):
+                for f in filenames:
+                    fp = os.path.join(dirpath, f)
+                    os.remove(fp)
+    if total_files > 20:
+        result = showQuestionBox("Warning", "Log folder contains more than 20 files. Do you want to delete all old logs?.")
         if result == QMessageBox.Yes:
             for dirpath, dirnames, filenames in os.walk("logs"):
                 for f in filenames:

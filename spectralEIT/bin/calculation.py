@@ -8,7 +8,7 @@ import logging
 from spectralEIT.bin.constants import constants as con
 from spectralEIT.bin.parameters import Parameters as par
 from spectralEIT.bin.material import Material as mat
-from spectralEIT.bin.default_config import LIST_TYPES, NUMBER_TYPES
+from spectralEIT.bin.string_manipulation import format_float_to_scale
 
 class LightPropagation():
 
@@ -78,41 +78,32 @@ class LightPropagation():
 
         self.logger.info("Inside rabi_shape")
 
-        if type(z) in LIST_TYPES:
-            zet = z
-        elif type(z) in NUMBER_TYPES:
-            zet = np.linspace(0,z,int(z/self.par.rabiSteps)) if z != 0 else np.array([0])
-        else:
-            raise ValueError("Error in Rabi function: type of \"z\" must be in \nlistTypes = "+str(LIST_TYPES)+"\nnumTypes = "+str(NUMBER_TYPES))
+        z = z - self.par.posLC
 
-        zet = zet - self.par.posLC
+        self.logger.info("z is: %s m, with LC position: %s m", format_float_to_scale(z), format_float_to_scale(self.par.posLC))
 
-        shape = np.zeros(len(zet))
-        for i,dz in enumerate(zet):
-            if dz < 0:
-                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)
-                continue
-            if 0 < dz < self.par.lcLength:
-                shape[i] = self.cell_prop(dz,w0f,self.par.prop,wavelength)
-                continue
-            if dz < self.par.lcLength:
-                shape[i] = self.cell_prop(dz,w0f,"Free Space",wavelength)
-
-        if type(z) in LIST_TYPES:
+        if z < 0:
+            shape = self.cell_prop(z,w0f,"Free Space",wavelength)
             return shape
-        elif type(z) in NUMBER_TYPES:
-            return shape[-1]
+        elif 0 <= z <= self.par.lcLength:
+            shape = self.cell_prop(z,w0f,self.par.prop,wavelength)
+            return shape
+        elif self.par.lcLength < z:
+            shape = self.cell_prop(z,w0f,"Free Space",wavelength)
+            return shape
         else:
-            return 0,0
+            raise ValueError("Error in Rabi function: z out of bounds")
 
 
     ##
     def cell_prop(self,z,w0,prop, wavelength):
         if prop == "Free Space":
+            self.logger.info("Calculating the Rabi function for free space, with z=%s m", format_float_to_scale(z))
             zR = np.pi*w0**2/wavelength
             wz = w0 * np.sqrt(1+(z/zR)**2)
             return w0**2/wz**2
         elif prop == "Light Cage":
+            self.logger.info("Calculating the Rabi function for light cage, with z=%s m", format_float_to_scale(z))  
             return 10**(self.par.lossdB*z/20)
         else:
             raise ValueError("Error in Rabi function: prop must be \"Free Space\" or \"Light Cage\"")
@@ -145,7 +136,7 @@ class LightPropagation():
         if "weak" in self.par.type:
             rabi0 = 0
         elif "EIT" in self.par.type:
-            self.logger.info("Initial Rabi frequency is, %f", self.par.rabiFrequency)
+            self.logger.info("Initial Rabi frequency is, %s Hz", format_float_to_scale(self.par.rabiFrequency))
             rabi0 = self.par.rabiFrequency
 
         self.logger.info("Set the light shape, pulse or cw, current is %s", self.par.lightShape)
@@ -155,11 +146,11 @@ class LightPropagation():
             self.logger.info("Creating a pulse")
 
             df = 2*np.max(self.par.f)/self.par.gridSize 
-            self.logger.info("df is %f", df)
+            self.logger.info("df is %s", format_float_to_scale(df))
             self.t = 1/df*np.arange(-self.par.gridSize/2,self.par.gridSize/2)/self.par.gridSize
             # print(self.t)
             dt = 2*np.max(self.t)/np.size(self.t)
-            self.logger.info("dt is %f", dt)
+            self.logger.info("dt is %s", format_float_to_scale(dt))
 
             if self.par.type == "EITStandalone":
                 pulseFreq = 0
@@ -180,13 +171,15 @@ class LightPropagation():
         if self.par.propType == "focused":
             TFunction = 1
             for i,zStep in enumerate(self.z):
-                self.logger.info("Current zStep is %f", zStep)
+                self.logger.info("Current zStep is %s m", format_float_to_scale(zStep))
                 if progress_callback != None:
                     progress_callback.emit(self.text(), int(100*zStep/self.par.cellLength))
                 # get the rabi frequency
                 if "EIT" in self.par.type:
                     shape = self.rabi_shape(zStep,width0,wavelength)
+                    self.logger.info("Shape of the Rabi function is: %s", format_float_to_scale(shape))
                     rabi = rabi0*shape
+                    self.logger.info("rabi is now %s Hz", format_float_to_scale(rabi))
                     chi_e = self.chi_select(rabi)
                     self.rabiFunction[i] = rabi
                 else:
@@ -263,16 +256,16 @@ class LightPropagation():
             
 
     def _chi_select(self, damping=1, rabi=0):
-        self.logger.info("Calculate chi with damping=%f and the Rabi frequency=%f", damping, rabi)
+        self.logger.info("Calculate chi with damping=%s and the Rabi frequency=%s Hz", format_float_to_scale(damping), format_float_to_scale(rabi))
         # Rabi frequency in circular angles
         rabiCirc = con.circ*np.abs(rabi)
 
         # Get the pre factors for the chi
         N = self.mat.number_density(self.par.Tk) / (2*(2*self.mat.I+1)) # number density
         preFactor = damping * N * self.mat.d02 / (con.ep0 * con.hbar) # prefactor
-        self.logger.info("Prefactor is %f", preFactor)
-        self.logger.info("Number density is %f", N)
-        self.logger.info("d02 is %f", self.mat.d02)
+        self.logger.info("Prefactor is %s", format_float_to_scale(preFactor))
+        self.logger.info("Number density is %s", format_float_to_scale(N))
+        self.logger.info("d02 is %s", format_float_to_scale(self.mat.d02))
 
         #transitions = [0,1,2,3]
         ret=np.zeros(len(self.par.wDet),dtype=complex)
@@ -323,7 +316,7 @@ class LightPropagation():
     ## Auxiliary Chi function to calculate the form of the chi for a given field or fields
     def chi_function(self,w0=0,EITDetune=0,rabi=0):
         
-        self.logger.info("Inside chi auxiliary function with, w0=%f, EITDetune=%f, rabi=%f", w0, EITDetune, rabi)
+        self.logger.info("Inside chi auxiliary function with, w0=%s Hz, EITDetune=%s Hz, rabi=%s Hz", format_float_to_scale(w0), format_float_to_scale(EITDetune), format_float_to_scale(rabi))
 
         delta = -(self.par.wDet - w0 - self.par.w0Det)
         deltaEIT = EITDetune - self.par.w0Det + self.par.EITDetuneCirc

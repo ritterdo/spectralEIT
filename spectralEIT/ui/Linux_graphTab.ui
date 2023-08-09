@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
+    <width>631</width>
     <height>555</height>
    </rect>
   </property>
@@ -37,7 +37,7 @@
      <x>100</x>
      <y>10</y>
      <width>211</width>
-     <height>25</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="readOnly">
@@ -83,6 +83,12 @@
          <width>140</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -143,6 +149,12 @@
           <height>25</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Ubuntu</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
         <property name="cursor" stdset="0">
          <cursorShape>IBeamCursor</cursorShape>
         </property>
@@ -171,6 +183,12 @@
           <width>150</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Ubuntu</family>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="cursor" stdset="0">
          <cursorShape>IBeamCursor</cursorShape>
@@ -210,6 +228,12 @@
           <width>150</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Ubuntu</family>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="cursor" stdset="0">
          <cursorShape>IBeamCursor</cursorShape>
@@ -319,7 +343,7 @@
   <widget class="QLabel" name="label_material">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>360</x>
      <y>10</y>
      <width>71</width>
      <height>25</height>
@@ -338,7 +362,7 @@
   <widget class="QComboBox" name="comboBox_material">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>430</x>
      <y>10</y>
      <width>150</width>
      <height>25</height>
@@ -354,7 +378,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>360</x>
      <y>60</y>
      <width>111</width>
      <height>16</height>
@@ -367,7 +391,7 @@
   <widget class="QFrame" name="frame_3">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>350</x>
      <y>80</y>
      <width>261</width>
      <height>101</height>
@@ -387,6 +411,12 @@
         <width>150</width>
         <height>25</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>9</pointsize>
+       </font>
       </property>
      </widget>
     </item>
@@ -412,6 +442,12 @@
         <height>25</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
      </widget>
     </item>
    </layout>
@@ -419,7 +455,7 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>360</x>
      <y>290</y>
      <width>131</width>
      <height>18</height>
@@ -432,7 +468,7 @@
   <widget class="QFrame" name="frame_4">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>350</x>
      <y>310</y>
      <width>261</width>
      <height>51</height>
@@ -459,6 +495,12 @@
         <width>150</width>
         <height>25</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu</family>
+        <pointsize>9</pointsize>
+       </font>
       </property>
      </widget>
     </item>

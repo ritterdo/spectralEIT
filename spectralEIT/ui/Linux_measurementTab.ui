@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
+    <width>631</width>
     <height>555</height>
    </rect>
   </property>
@@ -41,6 +41,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
@@ -51,7 +56,7 @@
   <widget class="QLabel" name="label_imported_data_size">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>340</x>
      <y>10</y>
      <width>131</width>
      <height>41</height>
@@ -64,7 +69,7 @@
   <widget class="QFrame" name="frame_advanced_settings">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>300</x>
      <y>70</y>
      <width>311</width>
      <height>361</height>
@@ -106,6 +111,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
        </property>
@@ -127,6 +138,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
@@ -150,6 +167,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
        </property>
@@ -171,6 +194,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
@@ -223,6 +252,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
        </property>
@@ -273,6 +308,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
@@ -342,6 +383,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
        </property>
@@ -377,6 +424,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
@@ -444,6 +497,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
@@ -522,6 +581,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Ubuntu</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor" stdset="0">
         <cursorShape>IBeamCursor</cursorShape>
        </property>
@@ -552,6 +617,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
@@ -567,6 +637,11 @@
      <width>121</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
@@ -597,7 +672,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>480</x>
      <y>10</y>
      <width>131</width>
      <height>41</height>
@@ -612,6 +687,11 @@
      <width>121</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
@@ -673,7 +753,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>Select Main Area</string>
+    <string>Main Area</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="checkBox_debug_graphs">

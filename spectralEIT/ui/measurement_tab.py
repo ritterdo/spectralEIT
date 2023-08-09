@@ -66,6 +66,8 @@ class MeasurementTab(QWidget, DefaultClass):
         self.pushButton_highres_area.clicked.connect(lambda: select_area("highres_area"))
         self.pushButton_ref_peaks.clicked.connect(lambda: select_points("ref_peaks"))
 
+        self.checkBox_debug_graphs.stateChanged.connect(self.on_check_box_state_changed)
+
         self.sigSetPoints.connect(set_points)
 
         self.set_default_values()
@@ -78,6 +80,11 @@ class MeasurementTab(QWidget, DefaultClass):
         self.lineEdit_imported_data_size.setText(str(len(item.frequency)))
         self.logger.info("Set current_import to %s", item.text())
 
+
+    def on_check_box_state_changed(self):
+        if hasattr(self, "current_import"):
+            self.current_import.update_plotable(self.checkBox_debug_graphs.isChecked())
+            self.window().update_plotable(self.current_import)
 
     def set_default_values(self):
 
@@ -108,7 +115,7 @@ class MeasurementTab(QWidget, DefaultClass):
                 self.current_import.reference = self.current_import.inverse_value(self.current_import.reference)
             if self.current_import.spectrum.any():
                 self.current_import.spectrum = self.current_import.inverse_value(self.current_import.spectrum)
-            self.current_import.update_item()
+            self.current_import.update_item(self.checkBox_debug_graphs.isChecked())
             self.logger.info("Inversion successful")
             return None
         except Exception:
@@ -131,7 +138,8 @@ class MeasurementTab(QWidget, DefaultClass):
                 self.current_import.spectrum = self.current_import.initial_cut(self.current_import.spectrum, cut = main_area)
             if self.current_import.frequency.any():
                 self.current_import.frequency = self.current_import.initial_cut(self.current_import.frequency, cut = main_area)
-            self.current_import.update_item()
+            self.current_import.update_item(self.checkBox_debug_graphs.isChecked())
+            self.window().update_plotable(self.current_import)
             self.logger.info("Initial cut/Main area cut out successful")
             return None
         except Exception:
@@ -143,6 +151,7 @@ class MeasurementTab(QWidget, DefaultClass):
         self.logger.info("Reset data for %s", self.current_import.text())
         try:
             self.current_import.set_data()
+            self.current_import.remove_debug_graphs()
             self.current_import.update_item()
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())
@@ -153,12 +162,12 @@ class MeasurementTab(QWidget, DefaultClass):
         self.logger.info("Modify X from Volt to frequency for %s", self.current_import.text())
         try:
             initial_guess = {"initial_offset_x":np.array([float(x) for x in self.textEdit_ref_peaks.toPlainText().split(",")]),
-                "initial_offset_y":0,
+                "initial_offset_y":np.array([1]),
                 "initial_amps":np.array([float(x) for x in self.textEdit_ref_heights.toPlainText().split(",")]),
-                "initial_widths":np.ones(4)*0.5
+                "initial_widths":np.ones(4)*0.025
                 }
             self.current_import.frequency = self.current_import.modify_X(self.current_import.frequency,self.current_import.reference,polyfit_degree=int(self.textEdit_polyfit_degree_peaks.toPlainText()),**initial_guess)
-            self.current_import.update_item()
+            self.current_import.update_item(self.checkBox_debug_graphs.isChecked())
             self.window().update_plotable(self.current_import)
 
             self.window().tab_graph_widget.currentWidget().remove_selection_lines()
@@ -191,7 +200,7 @@ class MeasurementTab(QWidget, DefaultClass):
             self.current_import.spectrum = self.current_import.remove_background(self.current_import.frequency,self.current_import.spectrum, **background_args, set = "spectrum")
             # self.current_import.reference = self.current_import.remove_background(self.current_import.frequency,self.current_import.reference,set = "reference")
             # self.current_import.spectrum = self.current_import.remove_background(self.current_import.frequency,self.current_import.spectrum, set = "spectrum")
-            self.current_import.update_item()
+            self.current_import.update_item(self.checkBox_debug_graphs.isChecked())
             self.window().update_plotable(self.current_import)
             self.logger.info("Removal successful")
         except Exception:
@@ -229,7 +238,7 @@ class MeasurementTab(QWidget, DefaultClass):
             self.logger.info("High resolution area: [%f,%f]", highres_area[0], highres_area[1])
  
             self.current_import.f_sub,self.current_import.spectrum_sub = self.current_import.subsampling(x, y, highres_area, sampling)
-            self.current_import.update_item()
+            self.current_import.update_item(self.checkBox_debug_graphs.isChecked())
             self.window().update_plotable(self.current_import)
         except Exception:
             info.showCriticalErrorBox(sys.exc_info())

@@ -67,7 +67,7 @@
      <x>280</x>
      <y>70</y>
      <width>311</width>
-     <height>341</height>
+     <height>361</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -82,7 +82,7 @@
       <x>10</x>
       <y>10</y>
       <width>291</width>
-      <height>321</height>
+      <height>337</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
@@ -674,6 +674,22 @@
    </property>
    <property name="text">
     <string>Select Main Area</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_debug_graphs">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>400</y>
+     <width>101</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string>Show Debug</string>
    </property>
   </widget>
  </widget>

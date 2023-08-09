@@ -18,10 +18,14 @@ from spectralEIT.bin.exceptions import BackgroundRemoveError, SubsamplingError, 
 from scipy.optimize import curve_fit
 from scipy.interpolate import interp1d
 
+import logging
+
 class Measurements(DataIO):
 
 
     def __init__(self, _material: str):
+
+        self.logger = logging.getLogger(__name__)
 
         file_name = self.get_file()
 
@@ -72,6 +76,21 @@ class Measurements(DataIO):
         self.x_modified = False
 
 
+    def remove_debug_graphs(self):
+        if hasattr(self, "initial_reffit_ref"):
+            del self.initial_reffit_ref
+        if hasattr(self, "debug_reffit_freq"):
+            del self.debug_reffit_freq
+        if hasattr(self, "inverse_reference"):
+            del self.inverse_reference
+        if hasattr(self, "inverse_spectrum"):
+            del self.inverse_spectrum
+        if hasattr(self, "background_reference"):
+            del self.background_reference
+        if hasattr(self, "background_spectrum"):
+            del self.background_spectrum
+
+
     def initial_cut(self, values: np.ndarray = None, cut: list = None):
 
         if (self.background_removed_reference
@@ -100,8 +119,8 @@ class Measurements(DataIO):
                 x,
                 y,
                 initial_offset_x = np.array([-.75,-.6,.56,.75]),
-                initial_offset_y = 0,
-                initial_amps=np.array([0.2,0.1,0.3,0.4]),
+                initial_offset_y = np.array([1]),
+                initial_amps=np.array([0.4,0.3,0.2,0.4]),
                 initial_widths=np.ones(4)*0.025,
                 set: str = "reference",
                 polyfit_degree: int=8
@@ -110,18 +129,12 @@ class Measurements(DataIO):
         if not getattr(self, "background_removed_" + set):
             raise BackgroundRemoveError("Please execute the background removal first!")
 
-        def find_nearest(array, value):
-            array = np.asarray(array)
-            idx = (np.abs(array - value)).argmin()
-            return array[idx]
+        self.logger.info("Initial offset x: %s", str(initial_offset_x))
+        self.logger.info("Initial offset y: %s", str(initial_offset_y))
+        self.logger.info("Initial amplitudes: %s", str(initial_amps))
+        self.logger.info("Initial widths: %s", str(initial_widths))
 
-        initial_offset_x = np.array([find_nearest(x,initial_offset_x[i]) for i in range(4)])
-
-        y_p0 = []
-        y_p0 = np.append(y_p0,(initial_amps,initial_offset_x,initial_widths))
-        y_p0 = np.append(y_p0,initial_offset_y)
-
-        # inverse_y = 1/y - 1
+        y_p0 = np.concatenate((initial_amps,initial_offset_x,initial_widths,initial_offset_y))
 
         def reffit(x,*k):
             a=[k[i] for i in range(0,4)]
@@ -135,11 +148,20 @@ class Measurements(DataIO):
 
         # fit reffit (guass and negativ lorentz) to ref measurement
         p_ref, _ = curve_fit(reffit, x, y, p0=y_p0, maxfev=1000)
+
+        self.logger.info("Fitted offset x: %s", str([p_ref[i] for i in range(4,8)]))
+        self.logger.info("Fitted offset y: %s", str(p_ref[12]))
+        self.logger.info("Fitted amplitudes: %s", str([p_ref[i] for i in range(0,4)]))
+        self.logger.info("Fitted widths: %s", str([p_ref[i] for i in range(8,12)]))
+
         # get position of peaks in V and f
         self.peaks = np.array([p_ref[i] for i in range(4,8)])
         # x_peaks = [find_nearest(x, self.peaks[i]) for i in range(4)]
 
         self.x_modified = True
+
+        self.initial_retfit_freq = reffit(x,*y_p0)
+        self.debug_reffit_freq = reffit(x,*p_ref)
 
         return np.polyval(np.polyfit(self.peaks,self.mat.Hf,polyfit_degree),x)
 

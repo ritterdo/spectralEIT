@@ -2,12 +2,10 @@
 
 block_cipher = None
 datas = [
-    ("cesiumEIT\\ui\\*.ui, cesiumEIT\\ui"),
-    ("cesiumEIT\\tools\\*.ui, cesiumEIT\\tools")
-
+    ("spectralEIT/ui/*.ui, spectralEITui")
 ]
 
-a = Analysis(['cesiumEIT\\app.py'],
+a = Analysis(['spectralEIT/app.py'],
              pathex=[],
              binaries=[],
              datas=datas,

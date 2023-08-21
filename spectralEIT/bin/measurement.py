@@ -199,8 +199,10 @@ class Measurements(DataIO):
 
         x_cutted = x[(x<cut1[0]) | ((x>cut1[1]) & (x<cut2[0])) | (x>cut2[1])]
         y_cutted = y[(x<cut1[0]) | ((x>cut1[1]) & (x<cut2[0])) | (x>cut2[1])]
+
+        y_pol = np.polyval(np.polyfit(x_cutted,y_cutted,polyfit_degree), x)
         
-        setattr(self, "background_polyfit_" + set, np.polyval(np.polyfit(x_cutted,y_cutted,polyfit_degree), x))
+        setattr(self, "background_polyfit_" + set, y_pol)#np.interp(x, x_cutted, y_pol))
 
         return_y = y/getattr(self, "background_polyfit_" + set)
 

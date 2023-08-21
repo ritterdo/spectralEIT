@@ -36,6 +36,8 @@ class MeasListItem(Measurements, DataListItem):
             self.add_plot_item("Spectrum_Subsampled", self.f_sub, self.spectrum_sub)
         
         if checkBox_debug_graphs:
+            # Debug Graphs
+            # background removal baseline
             if hasattr(self, "background_spectrum"):
                 self.add_plot_item("Background_Spectrum", self.frequency, self.background_spectrum)
                 
@@ -47,12 +49,21 @@ class MeasListItem(Measurements, DataListItem):
                 
             if hasattr(self, "inverse_reference"):
                 self.add_plot_item("inverse_Reference", self.frequency, self.inverse_reference)
-        
+
+            # background removal polyfit
+            if hasattr(self, "background_polyfit_spectrum"):
+                self.add_plot_item("Background_Spectrum", freq, self.background_polyfit_spectrum)
+                
+            if hasattr(self, "background_polyfit_reference"):
+                self.add_plot_item("Background_Reference", freq, self.background_polyfit_reference)
+
+            # volt to frequency conversion
             if hasattr(self, "debug_reffit_freq"):
                 self.add_plot_item("debug_reffit_freq", self.frequency, self.debug_reffit_freq)
             
             if hasattr(self, "initial_reffit_freq"):
                 self.add_plot_item("initial_reffit", self.frequency, self.initial_reffit_freq)
+            
         else:
             if hasattr(self, "background_spectrum"):
                 self.remove_plot_item("Background_Spectrum")
@@ -65,6 +76,12 @@ class MeasListItem(Measurements, DataListItem):
                 
             if hasattr(self, "inverse_reference"):
                 self.remove_plot_item("inverse_Reference")
+
+            if hasattr(self, "background_polyfit_spectrum"):
+                self.remove_plot_item("Background_Spectrum")
+                
+            if hasattr(self, "background_polyfit_reference"):
+                self.remove_plot_item("Background_Reference")
         
             if hasattr(self, "debug_reffit_freq"):
                 self.remove_plot_item("debug_reffit_freq")

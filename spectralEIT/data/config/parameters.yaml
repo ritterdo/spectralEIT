@@ -30,4 +30,4 @@ mixing_k41: 6.7
 
 freqStart: -7e9
 freqStop: 7e9
-freqSteps:  5000
+freqSteps:  1000

@@ -74,6 +74,7 @@ class MainWindow(QMainWindow, DefaultClass):
         self.logger.info("Set MainWindow properties")
 
         self.load_ui("mainWindow.ui")
+        self.setWindowTitle("Spectral EIT")
         #self.setWindowFlags(Qt.FramelessWindowHint)
         self.oldPos = self.pos()
         self.moveWindow = False

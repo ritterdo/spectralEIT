@@ -24,7 +24,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="text">
@@ -71,6 +72,12 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label_select_area">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Select Area</string>
        </property>
@@ -151,7 +158,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -168,6 +175,12 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_y">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>y</string>
         </property>
@@ -186,7 +199,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -203,6 +216,12 @@
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_widths">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Widths</string>
         </property>
@@ -213,6 +232,12 @@
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_x">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>x</string>
         </property>
@@ -231,7 +256,7 @@
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -258,6 +283,12 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
@@ -273,6 +304,12 @@
       <width>75</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
@@ -291,6 +328,12 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>FWHM</string>
    </property>
@@ -303,6 +346,12 @@
      <width>121</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>PlotData Properties</string>
@@ -322,6 +371,12 @@
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
@@ -348,6 +403,12 @@
      <width>71</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
@@ -384,6 +445,12 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Settings FWHM</string>
    </property>
@@ -414,7 +481,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Ubuntu</family>
+        <family>Noto Sans</family>
         <pointsize>9</pointsize>
        </font>
       </property>
@@ -422,6 +489,12 @@
     </item>
     <item row="0" column="1">
      <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>Noto Sans</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Cut Off Height</string>
       </property>
@@ -429,6 +502,12 @@
     </item>
     <item row="2" column="1">
      <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <family>Noto Sans</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Relative Distance</string>
       </property>
@@ -444,7 +523,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Ubuntu</family>
+        <family>Noto Sans</family>
         <pointsize>9</pointsize>
        </font>
       </property>
@@ -460,6 +539,12 @@
      <width>131</width>
      <height>18</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Settings Properties</string>
@@ -483,6 +568,12 @@
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="1">
      <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <family>Noto Sans</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Cut Off Height</string>
       </property>
@@ -498,7 +589,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Ubuntu</family>
+        <family>Noto Sans</family>
         <pointsize>9</pointsize>
        </font>
       </property>

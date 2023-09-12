@@ -25,6 +25,12 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
@@ -61,6 +67,12 @@
      <width>131</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Imported Data Size</string>
@@ -113,7 +125,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -141,7 +153,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -169,7 +181,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -197,7 +209,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -226,6 +238,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -236,6 +254,12 @@
      </item>
      <item row="12" column="0">
       <widget class="QLabel" name="label_highres_area">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>High-Res Area</string>
        </property>
@@ -254,7 +278,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -283,6 +307,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -293,6 +323,12 @@
      </item>
      <item row="5" column="0">
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Area 1</string>
        </property>
@@ -311,7 +347,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -328,6 +364,12 @@
      </item>
      <item row="11" column="0">
       <widget class="QLabel" name="label_sampling_area">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Sub Sampling Area</string>
        </property>
@@ -335,6 +377,12 @@
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_main_area">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Main Area</string>
        </property>
@@ -347,6 +395,12 @@
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
@@ -363,6 +417,12 @@
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
@@ -385,7 +445,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -402,6 +462,12 @@
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_polyfit_degree_background">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Polyfit Degree</string>
        </property>
@@ -409,6 +475,12 @@
      </item>
      <item row="8" column="0">
       <widget class="QLabel" name="label_ref_peak_positions">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Doppler Free Peaks</string>
        </property>
@@ -427,7 +499,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -456,6 +528,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -466,6 +544,12 @@
      </item>
      <item row="10" column="0">
       <widget class="QLabel" name="label_sampling_steps">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Sampling Steps</string>
        </property>
@@ -478,6 +562,12 @@
          <width>150</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
        </property>
       </widget>
      </item>
@@ -500,7 +590,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -517,6 +607,12 @@
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Area 2</string>
        </property>
@@ -536,6 +632,12 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -546,6 +648,12 @@
      </item>
      <item row="9" column="0">
       <widget class="QLabel" name="label_ref_peak_heights">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Peak Heights</string>
        </property>
@@ -553,6 +661,12 @@
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_material">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
@@ -583,7 +697,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Ubuntu</family>
+         <family>Noto Sans</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -600,6 +714,12 @@
      </item>
      <item row="7" column="0">
       <widget class="QLabel" name="label_polyfit_degree_peaks">
+       <property name="font">
+        <font>
+         <family>Noto Sans</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Polyfit Degree</string>
        </property>
@@ -659,6 +779,12 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
@@ -677,6 +803,12 @@
      <width>131</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_subsampling">
@@ -708,6 +840,12 @@
      <width>121</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
@@ -749,6 +887,12 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
@@ -764,6 +908,12 @@
      <width>101</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>

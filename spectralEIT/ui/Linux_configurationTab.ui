@@ -21,9 +21,14 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>654</width>
+     <width>664</width>
      <height>600</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -33,9 +38,12 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>80</width>
           <height>20</height>
          </size>
         </property>
@@ -49,32 +57,22 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Frequency:</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_5">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <widget class="QLabel" name="label_par_freqStart">
@@ -87,8 +85,14 @@
         <property name="maximumSize">
          <size>
           <width>30</width>
-          <height>16777215</height>
+          <height>27</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Start</string>
@@ -106,12 +110,12 @@
         <property name="maximumSize">
          <size>
           <width>75</width>
-          <height>25</height>
+          <height>27</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -130,9 +134,15 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>1677215</width>
-          <height>16777215</height>
+          <width>30</width>
+          <height>27</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Stop</string>
@@ -150,12 +160,12 @@
         <property name="maximumSize">
          <size>
           <width>75</width>
-          <height>25</height>
+          <height>27</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -174,9 +184,15 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>1677215</width>
-          <height>16777215</height>
+          <width>30</width>
+          <height>27</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>9</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Steps</string>
@@ -194,12 +210,12 @@
         <property name="maximumSize">
          <size>
           <width>75</width>
-          <height>25</height>
+          <height>27</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>Ubuntu</family>
+          <family>Noto Sans</family>
           <pointsize>9</pointsize>
          </font>
         </property>
@@ -214,7 +230,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+         <enum>QSizePolicy::Maximum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -252,13 +268,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -277,6 +293,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -329,6 +351,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -350,13 +378,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -378,13 +406,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -406,13 +434,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -447,13 +475,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -472,6 +500,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -510,13 +544,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -536,6 +570,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -554,6 +594,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -590,6 +636,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -608,6 +660,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -646,13 +704,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -665,13 +723,14 @@
             <widget class="QComboBox" name="comboBox_lightShape">
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <item>
@@ -696,13 +755,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -724,13 +783,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -750,6 +809,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -768,6 +833,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -804,6 +875,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -825,13 +902,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -853,13 +930,14 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <item>
@@ -881,6 +959,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -917,6 +1001,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
@@ -935,6 +1025,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -957,13 +1053,14 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
               </font>
              </property>
              <item>
@@ -1020,13 +1117,13 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
-               <height>25</height>
+               <width>132</width>
+               <height>27</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <family>Ubuntu</family>
+               <family>Noto Sans</family>
                <pointsize>9</pointsize>
               </font>
              </property>
@@ -1045,6 +1142,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
+              </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
@@ -1067,6 +1170,8 @@
              </property>
              <property name="font">
               <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
                <underline>true</underline>
               </font>
              </property>
@@ -1085,6 +1190,8 @@
              </property>
              <property name="font">
               <font>
+               <family>Noto Sans</family>
+               <pointsize>9</pointsize>
                <underline>true</underline>
               </font>
              </property>
@@ -1130,13 +1237,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1158,13 +1265,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1183,6 +1290,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1205,13 +1318,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1230,6 +1343,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1252,13 +1371,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1271,6 +1390,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1293,13 +1418,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
                 </font>
                </property>
                <item>
@@ -1344,13 +1470,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1372,13 +1498,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1416,13 +1542,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1444,13 +1570,14 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
                 </font>
                </property>
                <item>
@@ -1473,6 +1600,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1491,6 +1624,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1527,6 +1666,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1548,13 +1693,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1573,6 +1718,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1609,6 +1760,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1627,6 +1784,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1662,6 +1825,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
                </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
@@ -1700,13 +1869,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1742,6 +1911,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1763,13 +1938,13 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>130</width>
-                 <height>25</height>
+                 <width>132</width>
+                 <height>27</height>
                 </size>
                </property>
                <property name="font">
                 <font>
-                 <family>Ubuntu</family>
+                 <family>Noto Sans</family>
                  <pointsize>9</pointsize>
                 </font>
                </property>
@@ -1805,6 +1980,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
                <property name="cursor">
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
@@ -1820,6 +2001,8 @@
               <widget class="QLabel" name="label_chibox">
                <property name="font">
                 <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
                  <underline>true</underline>
                 </font>
                </property>
@@ -1838,6 +2021,8 @@
                </property>
                <property name="font">
                 <font>
+                 <family>Noto Sans</family>
+                 <pointsize>9</pointsize>
                  <underline>true</underline>
                 </font>
                </property>
@@ -1866,9 +2051,15 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>23</height>
+              <width>135</width>
+              <height>25</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
@@ -1891,9 +2082,15 @@
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>23</height>
+              <width>135</width>
+              <height>25</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
@@ -1912,6 +2109,18 @@
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
            <widget class="QPushButton" name="pushButton_default_parameters">
+            <property name="maximumSize">
+             <size>
+              <width>135</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Default Parameter</string>
             </property>
@@ -1919,6 +2128,18 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_saveParameters">
+            <property name="maximumSize">
+             <size>
+              <width>135</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Save Parameter</string>
             </property>
@@ -1948,9 +2169,21 @@
            <widget class="QPushButton" name="pushButton_cancel">
             <property name="minimumSize">
              <size>
-              <width>144</width>
+              <width>0</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>135</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>Cancel</string>

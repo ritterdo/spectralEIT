@@ -74,7 +74,7 @@ class LightPropagation():
 
 
     ## Shape of the Rabi function a focused or guided strong laser beam
-    def rabi_shape(self,z,w0f,wavelength):
+    def rabi_shape(self, z, w0f, wavelength):
 
         self.logger.info("Inside rabi_shape")
 
@@ -83,20 +83,19 @@ class LightPropagation():
         self.logger.info("z is: %s m, with LC position: %s m", format_float_to_scale(z), format_float_to_scale(self.par.posLC))
 
         if z < 0:
-            shape = self.cell_prop(z,w0f,"Free Space",wavelength)
-            return shape
+            return self.cell_prop(z, prop="Free Space", w0=w0f, wavelength=wavelength)
         elif 0 <= z <= self.par.lcLength:
-            shape = self.cell_prop(z,w0f,self.par.prop,wavelength)
-            return shape
+            return self.cell_prop(z)
         elif self.par.lcLength < z:
-            shape = self.cell_prop(z,w0f,"Free Space",wavelength)
-            return shape
+            if self.behind_cell == False:
+                self.behind_cell = True
+            return self.cell_prop(z-self.par.lcLength, prop="Free Space", w0=w0f, wavelength=wavelength)
         else:
             raise ValueError("Error in Rabi function: z out of bounds")
 
 
     ##
-    def cell_prop(self,z,w0,prop, wavelength):
+    def cell_prop(self, z, prop="Light Cage", w0=None, wavelength=None):
         if prop == "Free Space":
             self.logger.info("Calculating the Rabi function for free space, with z=%s m", format_float_to_scale(z))
             zR = np.pi*w0**2/wavelength
@@ -132,7 +131,7 @@ class LightPropagation():
             self.par.widthFocused = width0
 
         self.logger.info("Get the Rabi frequency for either weak- or EIT-regime, current is: %s", self.par.type)
-        # get the rabi frequency
+        ## get the rabi frequency
         if "weak" in self.par.type:
             rabi0 = 0
         elif "EIT" in self.par.type:
@@ -140,7 +139,7 @@ class LightPropagation():
             rabi0 = self.par.rabiFrequency
 
         self.logger.info("Set the light shape, pulse or cw, current is %s", self.par.lightShape)
-        # create the light shape
+        ## create the light shape
         if self.par.lightShape == "pulse":
 
             self.logger.info("Creating a pulse")
@@ -148,7 +147,6 @@ class LightPropagation():
             df = 2*np.max(self.par.f)/self.par.gridSize 
             self.logger.info("df is %s", format_float_to_scale(df))
             self.t = 1/df*np.arange(-self.par.gridSize/2,self.par.gridSize/2)/self.par.gridSize
-            # print(self.t)
             dt = 2*np.max(self.t)/np.size(self.t)
             self.logger.info("dt is %s", format_float_to_scale(dt))
 
@@ -169,15 +167,20 @@ class LightPropagation():
 
         self.logger.info("Set the propagation type, current is %s", self.par.propType)
         if self.par.propType == "focused":
+            self.behind_cell = False
+            change_rabi = True
             TFunction = 1
             for i,zStep in enumerate(self.z):
                 self.logger.info("Current zStep is %s m", format_float_to_scale(zStep))
                 if progress_callback != None:
                     progress_callback.emit(self.text(), int(100*zStep/self.par.cellLength))
-                # get the rabi frequency
+                ## get the rabi frequency
                 if "EIT" in self.par.type:
-                    shape = self.rabi_shape(zStep,width0,wavelength)
+                    shape = self.rabi_shape(zStep, width0, wavelength)
                     self.logger.info("Shape of the Rabi function is: %s", format_float_to_scale(shape))
+                    if self.behind_cell == True and change_rabi == True:
+                        rabi0 = self.rabiFunction[i-1]
+                        change_rabi = False
                     rabi = rabi0*shape
                     self.logger.info("rabi is now %s Hz", format_float_to_scale(rabi))
                     chi_e = self.chi_select(rabi)
@@ -203,7 +206,12 @@ class LightPropagation():
         E *= TFunction
         self.TAbs = np.abs(TFunction)
 
-        # get the intensities
+
+        ## Delete the variables that are not needed anymore
+        del self.behind_cell
+        del change_rabi
+
+        ## Get the intensities
         if self.par.lightShape == "pulse":
             self.IoutW = np.abs(E)**2/np.max(self.IinW)
             self.IinW /= np.max(self.IinW)

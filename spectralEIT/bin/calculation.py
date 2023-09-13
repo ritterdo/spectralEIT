@@ -208,8 +208,10 @@ class LightPropagation():
 
 
         ## Delete the variables that are not needed anymore
-        del self.behind_cell
-        del change_rabi
+        if hasattr(self, "behind_cell"):
+            del self.behind_cell
+        if hasattr(self, "change_rabi"):
+            del change_rabi
 
         ## Get the intensities
         if self.par.lightShape == "pulse":

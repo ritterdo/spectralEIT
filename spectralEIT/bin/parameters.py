@@ -29,7 +29,6 @@ class Parameters(YamlImport):
                     tmp_dict[par] = DEFAULT_PARAMETER_DICT[par]
             self.set_attributes(tmp_dict)
 
-        # print(self.freqStart, self.freqStop, self.freqSteps)
         self.f = np.linspace(self.freqStart, self.freqStop, int(self.freqSteps))
 
         self.gridSize = len(self.f)

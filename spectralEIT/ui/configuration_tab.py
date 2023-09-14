@@ -17,6 +17,7 @@ from spectralEIT.bin.default_parameters import DEFAULT_PARAMETER_DICT
 from spectralEIT.bin.fit_parameters import fit_params_bound, fit_params_list
 from spectralEIT.bin.exceptions import ThreadError
 from spectralEIT.bin.default_config import DefaultClass, NUMBER_TYPES, PAR_DICT_INT_TYPE
+from spectralEIT.bin.material import Material as mat
 
 class ConfigurationTab(QWidget, DefaultClass):
 
@@ -53,6 +54,7 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.setup_tool_tips()
         self.import_material()
         self.load_parameters(every="all")
+        self.material_option()
         # self.set_default_values()
 
         self.refresh_ui()
@@ -214,6 +216,9 @@ class ConfigurationTab(QWidget, DefaultClass):
             self.label_par_mixing_k41.hide()
             self.textEdit_par_mixing_k41.hide()
             self.checkBox_mixing_k41.hide()
+        current_material = mat(self.comboBox_material.currentText())
+        wavelength = getattr(current_material,current_material.mat_list[0]).wavelength
+        self.textEdit_par_pulseFreq.setText(stringManipu.format_float_to_scale(299792458/wavelength))
             
 
 

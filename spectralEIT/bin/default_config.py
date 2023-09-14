@@ -28,7 +28,6 @@ class DefaultClass:
             raise ImportError("Could not get default material: cesium_D1")
 
         for material in material_list:
-            name_list = [self.comboBox_material.itemText(i) for i in range(self.comboBox_material.count())]
             self.comboBox_material.addItem(material)
         self.comboBox_material.setCurrentText("cesium_D1")
 
@@ -46,7 +45,7 @@ PAR_LIST_FIT = [
         "posLC",
         "cellLength",
         "dt",
-        "pulseFreq",
+        #"pulseFreq",
         "lcLength",
         "EITDetune",
         "f0det",

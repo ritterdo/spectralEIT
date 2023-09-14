@@ -45,7 +45,7 @@ PAR_LIST_FIT = [
         "posLC",
         "cellLength",
         "dt",
-        #"pulseFreq",
+        "pulseFreq",
         "lcLength",
         "EITDetune",
         "f0det",

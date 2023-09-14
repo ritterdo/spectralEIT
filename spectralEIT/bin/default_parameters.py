@@ -5,9 +5,8 @@ import yaml
 import re
 
 default_params = [
-            "width0", "focalLength", "posLC", "prop", "cellLength", "zsteps", "lightShape", "propType", "dt", "rabiFrequency",
-            "lcLength", "lossdB", "EITDetune", "f0det", "T", "gammad", "profile", "gaussSteps", "transition", 
-            "type", "gamma_coll", "freqStart", "freqStop", "freqSteps"
+            "width0", "focalLength", "posLC", "prop", "cellLength", "zsteps", "lightShape", "propType", "dt", "rabiFrequency", "lcLength", "lossdB", 
+            "EITDetune", "f0det", "T", "gammad", "profile", "gaussSteps", "transition", "type", "gamma_coll", "freqStart", "freqStop", "freqSteps"
         ]
 
 loader = yaml.SafeLoader

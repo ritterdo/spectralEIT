@@ -17,6 +17,7 @@ import spectralEIT.bin.log as log
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtCore import QFile, QTextStream
+from PyQt5.QtGui import QFont
 
 import platform
 
@@ -54,6 +55,20 @@ def main():
 
         app.setStyleSheet(stylesheet)
     # app.setStyleSheet(PyQt5_stylesheets.load_stylesheet_pyqt5(style="style_Dark"))
+
+    system = platform.system()
+    if system == "Linux":
+        custom_font = QFont("Noto Sans")
+        custom_font.setPointSize(9)
+        app.setFont(custom_font)
+    elif system == "Darwin":
+        custom_font = QFont("Helvetica Neue")
+        custom_font.setPointSize(9)
+        app.setFont(custom_font)
+    elif system == "Windows":
+        custom_font = QFont("Segoe UI")
+        custom_font.setPointSize(9)
+        app.setFont(custom_font)
 
     window = MainWindow()
     window.show()

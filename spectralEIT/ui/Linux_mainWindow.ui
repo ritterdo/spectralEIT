@@ -16,6 +16,12 @@
     <height>0</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Noto Sans</family>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -79,7 +85,7 @@
              <x>0</x>
              <y>0</y>
              <width>658</width>
-             <height>726</height>
+             <height>730</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -669,6 +675,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Axis</string>
             </property>
@@ -681,6 +693,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
@@ -711,6 +729,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>y=</string>
             </property>
@@ -723,6 +747,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Noto Sans</family>
+              <pointsize>9</pointsize>
+             </font>
             </property>
             <property name="text">
              <string>x=</string>
@@ -759,7 +789,7 @@
      <x>0</x>
      <y>0</y>
      <width>1560</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -775,6 +805,12 @@
     <bool>false</bool>
    </property>
    <widget class="QMenu" name="menuFile">
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="mouseTracking">
      <bool>true</bool>
     </property>
@@ -787,6 +823,12 @@
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuTools">
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
@@ -2060,6 +2102,12 @@ QDateEdit::down-arrow:focus
     <addaction name="actionLoss_LC_Calculator"/>
    </widget>
    <widget class="QMenu" name="menuMeasuement">
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Measuement</string>
     </property>
@@ -2070,7 +2118,14 @@ QDateEdit::down-arrow:focus
    <addaction name="menuMeasuement"/>
    <addaction name="menuTools"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <family>Noto Sans</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+  </widget>
   <action name="menu_actionExit">
    <property name="text">
     <string>Exit</string>

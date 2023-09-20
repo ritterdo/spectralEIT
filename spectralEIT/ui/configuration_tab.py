@@ -83,9 +83,9 @@ class ConfigurationTab(QWidget, DefaultClass):
         self.label_par_gammad.setToolTip("Ground-State Decoherence Rate [Hz]")
         self.label_par_gamma_coll.setToolTip("Collision Broadening Rate [Hz]")
         self.label_par_lossdB.setToolTip("Losses inside the light cage [dB]")
-        self.label_par_mixing_rb.setToolTip("Rubidium 95 amoung in mol fraction [%]")
-        self.label_par_mixing_k40.setToolTip("Potassium 40 amoung in mol fraction [%]")
-        self.label_par_mixing_k41.setToolTip("Potassium 41 amoung in mol fraction [%]")
+        self.label_par_mixing_rb.setToolTip("Rubidium 95 amount in mole fraction [%]")
+        self.label_par_mixing_k40.setToolTip("Potassium 40 amount in mole fraction [%]")
+        self.label_par_mixing_k41.setToolTip("Potassium 41 amount in mole fraction [%]")
 
 
     def light_shape_option(self):

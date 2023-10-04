@@ -356,7 +356,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="label_polyfit_degree_background">
        <property name="text">
-        <string>Polyfit Degree</string>
+        <string>Slope Fit Degree</string>
        </property>
       </widget>
      </item>
@@ -536,7 +536,7 @@
      <item row="7" column="0">
       <widget class="QLabel" name="label_polyfit_degree_peaks">
        <property name="text">
-        <string>Polyfit Degree</string>
+        <string>Peak Fit Degree</string>
        </property>
       </widget>
      </item>

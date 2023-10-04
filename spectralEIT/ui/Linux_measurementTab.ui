@@ -469,7 +469,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Polyfit Degree</string>
+        <string>Slope Fit Degree</string>
        </property>
       </widget>
      </item>
@@ -721,7 +721,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Polyfit Degree</string>
+        <string>Peak Fit Degree</string>
        </property>
       </widget>
      </item>

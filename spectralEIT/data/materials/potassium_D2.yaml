@@ -1,0 +1,127 @@
+# All Values and functions come from "Properties of Potassium" by Tobias G. Tiecke revision 1.03, 2019 and "Laser Cooling and Trapping" by Harold J. Metcalf and Peter Van Der StratenVan Der Straten, 1999
+
+potassium39:
+  m0: 0.6470080128e-25
+  I: 3/2
+
+  number_density: custom_function.potassium_number_density
+
+  wavelength: 766.700921822e-9
+  lifetime: 26.37e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 288.6e6
+    - -173.1e6
+  excitedstate_frequencies:
+    - -19.4e6
+    - -16.1e6
+    - -6.7e6
+    - 14.4e6
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: "2 * (1/40) + 1/30"        # F=2, F'=1  
+    1: "2 * (1/6 + 1/24)"         # F=2, F'=2
+    2: "2 * (1/6 + 4/15) + 3/10"  # F=2, F'=3
+    3: "1/6"                      # F=1, F'=0
+    4: "2 * 5/24"                 # F=1, F'=1
+    5: "2 * (1/8) + 1/6"          # F=1, F'=2
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 3
+    1: 4
+    2: 5
+    3: 0
+    4: 1
+    5: 2
+
+potassium40:
+  m0: 0.6636177e-25
+  I: 4
+
+  number_density: custom_function.potassium_number_density
+
+  wavelength: 766.700674872e-9
+  lifetime: 26.37e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 571.5e6
+    - -714.3e6
+  excitedstate_frequencies:
+    - -46.4e6
+    - -2.3e6
+    - 31.0e6
+    - 55.2e6
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: 2 * (1/22 + 5/63 + 6/59 + 6/53) # F=3.5, F'=4.5
+    1: 2 * (17/59 + 5/34 + 1/19 + 1/100) # F=3.5, F'=3.5
+    2: 2 * (3/28 + 5/28 + 3/14) # F=3.5, F'=2.5
+    3: 2 * (1/11 + 9/55 + 12/55 + 14/55 + 3/11) # F=4.5, F'=5.5
+    4: 2 * (8/33 + 11/75 + 3/40 + 1/37) # F=4.5, F'=4.5
+    5: 2 * (2/87 + 4/99 + 4/77 + 3/52) # F=4.5, F'=3.5
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 3
+    1: 4
+    2: 5
+    3: 0
+    4: 1
+    5: 2
+
+potassium41:
+  m0: 0.6801871e-25
+  I: 3/2
+
+  number_density: custom_function.potassium_number_density
+
+  wavelength: 766.70045870e-9
+  lifetime: 26.37e-9
+
+  # frequency difference to center frequency of that state
+  # detuned frequency relative to the center frequency of the state
+  groundstate_frequencies:
+    - 158.8e6
+    - -95.3e6
+  excitedstate_frequencies:
+    - -8.4e6
+    - -8.4e6
+    - -5.0e6
+    - 8.4e6
+
+  dFactor:
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
+    # of groundstate and excitedstate frequency.
+    0: "2 * (1/40) + 1/30"        # F=2, F'=1  
+    1: "2 * (1/6 + 1/24)"         # F=2, F'=2
+    2: "2 * (1/6 + 4/15) + 3/10"  # F=2, F'=3
+    3: "1/6"                      # F=1, F'=0
+    4: "2 * 5/24"                 # F=1, F'=1
+    5: "2 * (1/8) + 1/6"          # F=1, F'=2
+
+
+  EIT_config:
+    # possible EIT configuration for all transitions
+    # amount must fit the product of groundstate_frequencies and exitedstate_frequencies
+    0: 3
+    1: 4
+    2: 5
+    3: 0
+    4: 1
+    5: 2

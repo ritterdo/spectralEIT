@@ -13,8 +13,8 @@ cesium:
   # frequency difference to center frequency of that state
   # detuned frequency relative to the center frequency of the state
   groundstate_frequencies:
-    - 4.021776399375e9
-    - -5.170855370625e9
+    - 5.170855370625e9
+    - -4.021776399375e9
   excitedstate_frequencies:
     - -339.7128e6
     - -188.4885e6
@@ -28,15 +28,16 @@ cesium:
   Hf_config: [0,1,2,5,6,7]
 
   dFactor:
-    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)
+    # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->excitedstate)
     # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
     # of groundstate and excitedstate frequency.
-    0: "2 * (5/96 + 5/56 + 25/224) + 5/42"
-    1: "2 * (9/32 + 1/8 + 1/32)"
-    2: "2 * (5/42 + 4/21) + 3/14"
-    3: "2 * (1/10 + 8/45 + 7/30 * 4/15) + 5/18"
-    4: "2 * (7/30 + 21/160 + 7/120 + 7/480)"
-    5: "2 * (7/288 * 1/24 + 5/96) + 1/18"
+    
+    0: "2 * (1/10 + 8/45 + 7/30 * 4/15) + 5/18"   # F=4, F'=3
+    1: "2 * (7/30 + 21/160 + 7/120 + 7/480)"      # F=4, F'=4
+    2: "2 * (7/288 * 1/24 + 5/96) + 1/18"         # F=4, F'=5
+    3: "2 * (5/42 + 4/21) + 3/14"                 # F=3, F'=2
+    4: "2 * (9/32 + 1/8 + 1/32)"                  # F=3, F'=3
+    5: "2 * (5/96 + 5/56 + 25/224) + 5/42"        # F=3, F'=4
 
 
   EIT_config:

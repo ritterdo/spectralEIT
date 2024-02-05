@@ -23,8 +23,8 @@ rubidium85:
     # Hyperfine transition strength factor (only pi-transitions/linear, from groundstate->exitedstate)
     # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
     # of groundstate and excitedstate frequency.
-    0: "2 * (1/3 + 4/27 + 1/27)" # F=3, F'=3 -> 1.037037037037037
-    1: "2 * (5/27 + 8/27) + 1/3" # F=3, F'=2 -> 1.2962962962962963
+    0: "2 * (5/27 + 8/27) + 1/3" # F=3, F'=2 -> 1.2962962962962963
+    1: "2 * (1/3 + 4/27 + 1/27)" # F=3, F'=3 -> 1.037037037037037
     2: "2 * (4/27 + 1/27)"       # F=2, F'=2 -> 0.37037037037037035
     3: "2 * (5/27 + 8/27) + 1/3" # F=2, F'=3 -> 1.2962962962962963
 
@@ -60,10 +60,10 @@ rubidium87:
     # Hyperfine transition strength factor (only pi-transitions/linear, from groundstate->exitedstate)
     # Amount must fit the number of allowed transmissions, if all transmissions are allowed the product
     # of groundstate and excitedstate frequency.
-    0: "2 * (1/3 + 1/12)" # F=2, F'=2 -> 0.8333333333333333
-    1: "2 * (1/4) + 1/3"  # F=2, F'=1 -> 0.8333333333333333
-    2: "2 * (1/12)"       # F=1, F'=1 -> 0.16666666666666666
-    3: "2 * (1/4) + 1/3"  # F=1, F'=2 -> 0.8333333333333333
+    0: "2 * (1/4) + 1/3"  # F=3, F'=2 -> 0.8333333333333333
+    1: "2 * (1/3 + 1/12)" # F=3, F'=3 -> 0.8333333333333333
+    2: "2 * (1/12)"       # F=2, F'=2 -> 0.16666666666666666
+    3: "2 * (1/4) + 1/3"  # F=2, F'=3 -> 0.8333333333333333
   
   EIT_config:
     # Possible EIT configuration for all transitions

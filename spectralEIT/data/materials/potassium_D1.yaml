@@ -48,11 +48,11 @@ potassium40:
   # frequency difference to center frequency of that state
   # detuned frequency relative to the center frequency of the state
   groundstate_frequencies:
-    - 288.6e6
-    - -173.1e6
+    - 571.5e6
+    - -714.3e6
   excitedstate_frequencies:
-    - -34.7e6
-    - 20.8e6
+    - -69.0e6
+    - 86.3e6
 
   dFactor:
     # hyperfine transition strength factor (only pi-transmissions/linear, from groundstate->exitedstate)

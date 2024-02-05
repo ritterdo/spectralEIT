@@ -13,7 +13,7 @@ cesium:
   # frequency difference to center frequency of that state
   # detuned frequency relative to the center frequency of the state
   groundstate_frequencies:
-    - 5.17085570625e9
+    - 5.170855370625e9
     - -4.021776399375e9
   excitedstate_frequencies:
     - -656.820e6
